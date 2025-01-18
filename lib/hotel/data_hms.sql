@@ -1,10 +1,21 @@
 show databases;
+drop database hms;
 
 create database hms;
 
 use hms;
 
-drop database hms;
+create table hotel_login(
+	username varchar(10),
+    password int
+);
+
+select * from hotel_login;
+
+INSERT INTO hotel_login (username, password) VALUES
+("admin", 1234);
+
+
 
 -- 1. Department Table
 CREATE TABLE Department (
@@ -247,13 +258,13 @@ select * from Payment;
 
 
 -- 1. Service length of employees (in years)
-SELECT 
+SELECT
     e.emp_id,
     TIMESTAMPDIFF(YEAR, e.date_of_join, CURDATE()) as service_years
 FROM Employee e;
 
 -- 2. Driver details with license
-SELECT 
+SELECT
     e.*,
     d.driving_license,
     d.experience
@@ -261,14 +272,14 @@ FROM Employee e
 JOIN Driver d ON e.emp_id = d.emp_id;
 
 -- 3. Count employees in each department
-SELECT 
+SELECT
     dept_name,
     COUNT(*) as employee_count
 FROM Employee
 GROUP BY dept_name;
 
 -- 4. Department wise maximum salary with employee details
-SELECT 
+SELECT
     e.dept_name,
     e.emp_id,
     s.salary
@@ -282,7 +293,7 @@ ORDER BY e.dept_name;
 
 
 -- 5. Department wise average salary
-SELECT 
+SELECT
     dept_name,
     AVG(salary) as avg_salary
 FROM Employee
@@ -305,7 +316,7 @@ WHERE status = 'dirty';
 select * from dirty_rooms;
 
 -- 8. Current customers with reservations
-SELECT 
+SELECT
     c.*,
     r.room_id,
     r.check_in_date,
@@ -316,7 +327,7 @@ WHERE r.check_out_date >= CURDATE();
 
 
 -- 9. Delete customers who canceled all reservations
-DELETE FROM Customer 
+DELETE FROM Customer
 WHERE cus_id IN (
     SELECT c.cus_id
     FROM Cancel c
@@ -339,7 +350,7 @@ SELECT AVG(rating) as average_rating
 FROM Customer;
 
 -- 13. Monthly profit calculation
-SELECT 
+SELECT
     DATE_FORMAT(r.check_out_date, '%Y-%m') as month,
     SUM(rm.profit_per_room) as total_profit
 FROM Reserve r
@@ -359,13 +370,12 @@ WHERE cus_id IN (
     FROM Reserve r
     WHERE r.check_out_date < DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
     AND NOT EXISTS (
-        SELECT 1 
-        FROM Reserve r2 
-        WHERE r2.cus_id = r.cus_id 
+        SELECT 1
+        FROM Reserve r2
+        WHERE r2.cus_id = r.cus_id
         AND r2.check_out_date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
     )
 );
-
 
 
 
