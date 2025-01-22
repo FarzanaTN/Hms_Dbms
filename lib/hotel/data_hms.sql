@@ -1,21 +1,10 @@
 show databases;
-drop database hms;
 
 create database hms;
 
 use hms;
 
-create table hotel_login(
-	username varchar(10),
-    password int
-);
-
-select * from hotel_login;
-
-INSERT INTO hotel_login (username, password) VALUES
-("admin", 1234);
-
-
+drop database hms;
 
 -- 1. Department Table
 CREATE TABLE Department (
@@ -118,19 +107,7 @@ CREATE TABLE Customer (
     rating INT DEFAULT 0 CHECK (rating >= 0 AND rating <= 5)
 );
 
--- 10.Cancel Table
-CREATE TABLE Cancel (
-    cus_id int,
-    c_id int,
-    room_id int,
-    PRIMARY KEY (cus_id, c_id),
-    FOREIGN KEY (cus_id) REFERENCES Customer(cus_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    FOREIGN KEY (room_id) REFERENCES Room(room_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
+
 
 
 CREATE TABLE Reserve (
@@ -148,6 +125,9 @@ CREATE TABLE Reserve (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+ALTER TABLE Reserve
+ADD COLUMN status ENUM('active', 'cancel') NOT NULL DEFAULT 'active';
 
 -- 12. Payment Table
 CREATE TABLE Payment (
@@ -232,12 +212,40 @@ INSERT INTO Customer (cus_id, first_name, last_name, gender, email, phone, ratin
 (1, 'Rafiq', 'Ahmed', 'Male', 'rafiq.ahmed@example.com', '01855000001', 4),
 (2, 'Nusrat', 'Jahan', 'Female', 'nusrat.jahan@example.com', '01866000002', 5);
 
+INSERT INTO Customer (first_name, last_name, gender, email, phone, rating) VALUES
+('farzana', 'Ahmed', 'Male', 'rafiq.ahmed@example.com', '01855000001', 4),
+('amina', 'Jahan', 'Female', 'nusrat.jahan@example.com', '01866000002', 5);
+
+INSERT INTO Customer (first_name, last_name, gender, email, phone, rating) VALUES
+('jenny', 'Ahmed', 'Male', 'rafiq.ahmed@example.com', '01855000001', 4),
+('ammmmmm', 'Jahan', 'Female', 'nusrat.jahan@example.com', '01866000002', 5);
+
+
 select * from Customer;
 
 -- Insert data into Reserve table
 INSERT INTO Reserve (cus_id, r_id, room_id, check_in_date, check_out_date, total_bill) VALUES
 (1, 1, 101, '2025-01-01', '2025-01-03', 3000.00),
 (2, 2, 102, '2025-01-02', '2025-01-05', 9000.00);
+
+INSERT INTO Reserve (cus_id, r_id, room_id, check_in_date, check_out_date, total_bill) VALUES
+( 1,1, 102, '2025-01-01', '2025-01-03', 3000.00);
+
+
+INSERT INTO Reserve (cus_id, r_id, room_id, check_in_date, check_out_date, total_bill) VALUES
+( 3,1, 510, '2025-01-01', '2025-02-03', 3000.00),
+( 4,1, 510, '2025-01-01', '2025-03-03', 3000.00);
+
+INSERT INTO Reserve (cus_id, r_id, room_id, check_in_date, check_out_date, total_bill,status) VALUES
+( 5,1, 510, '2025-01-01', '2025-02-03', 3000.00,'cancel'),
+( 6,1, 510, '2025-01-01', '2025-03-03', 3000.00,'cancel');
+
+update Reserve
+set status = 'cancel'
+where cus_id=3;
+
+
+
 
 select * from Reserve;
 
@@ -323,17 +331,18 @@ SELECT
     r.check_out_date
 FROM Customer c
 JOIN Reserve r ON c.cus_id = r.cus_id
-WHERE r.check_out_date >= CURDATE();
+WHERE r.check_out_date >= CURDATE() and r.status='active';
 
 
 -- 9. Delete customers who canceled all reservations
 DELETE FROM Customer
 WHERE cus_id IN (
-    SELECT c.cus_id
-    FROM Cancel c
-    LEFT JOIN Reserve r ON c.cus_id = r.cus_id
-    WHERE r.cus_id IS NULL
+    SELECT cus_id
+    FROM Reserve
+    GROUP BY cus_id
+    HAVING COUNT(*) = SUM(status = 'cancel')
 );
+
 
 -- 10. Delete specific reservation if canceled
 DELETE FROM Reserve
@@ -377,9 +386,22 @@ WHERE cus_id IN (
     )
 );
 
+create table hotel_login(
+	username varchar(10),
+    password int
+);
+
+select * from hotel_login;
+
+INSERT INTO hotel_login (username, password) VALUES
+("admin", 1234);
+
+select *
+from customer
 
 
-
+select *
+from reserve
 
 
 
