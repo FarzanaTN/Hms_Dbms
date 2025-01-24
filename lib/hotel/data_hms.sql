@@ -205,6 +205,13 @@ INSERT INTO Room (room_id, status, available, type, price, profit_per_room) VALU
 (102, 'dirty', 'no', 'double bed', 3000.00, 800.00),
 (103, 'clean', 'yes', 'single bed', 2000.00, 500.00);
 
+INSERT INTO Room (room_id, status, available, type, price, profit_per_room) VALUES
+(201, 'clean', 'yes', 'single bed', 2000.00, 500.00),
+(202, 'clean', 'yes', 'double bed', 3000.00, 800.00),
+(203, 'clean', 'yes', 'single bed', 2000.00, 500.00);
+
+
+
 select * from Room;
 
 -- Insert data into Customer table
@@ -402,7 +409,6 @@ from customer
 
 select *
 from reserve
-
 
 
 
