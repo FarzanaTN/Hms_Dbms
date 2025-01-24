@@ -1,10 +1,20 @@
 show databases;
+drop database hms;
 
 create database hms;
 
 use hms;
 
-drop database hms;
+create table hotel_login(
+	username varchar(10),
+    password int
+);
+
+select * from hotel_login;
+
+INSERT INTO hotel_login (username, password) VALUES
+("admin", 1234);
+
 
 -- 1. Department Table
 CREATE TABLE Department (
@@ -96,6 +106,8 @@ CREATE TABLE Room (
     profit_per_room DECIMAL(10,2) NOT NULL
 );
 
+select * from Room;
+
 -- 9.Customer Table
 CREATE TABLE Customer (
     cus_id int auto_increment PRIMARY KEY,
@@ -107,7 +119,7 @@ CREATE TABLE Customer (
     rating INT DEFAULT 0 CHECK (rating >= 0 AND rating <= 5)
 );
 
-
+select * from Customer;
 
 
 CREATE TABLE Reserve (
@@ -116,7 +128,7 @@ CREATE TABLE Reserve (
     room_id INT,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL,
-    total_bill DECIMAL(10,2) not null check (total_bill > 0),
+    total_bill DECIMAL(10,2) not null check (total_bill > 0) ,
     PRIMARY KEY (cus_id, r_id),
     FOREIGN KEY (cus_id) REFERENCES Customer(cus_id)
         ON DELETE CASCADE
@@ -128,6 +140,10 @@ CREATE TABLE Reserve (
 
 ALTER TABLE Reserve
 ADD COLUMN status ENUM('active', 'cancel') NOT NULL DEFAULT 'active';
+
+
+select * from Reserve;
+
 
 -- 12. Payment Table
 CREATE TABLE Payment (
@@ -205,13 +221,6 @@ INSERT INTO Room (room_id, status, available, type, price, profit_per_room) VALU
 (102, 'dirty', 'no', 'double bed', 3000.00, 800.00),
 (103, 'clean', 'yes', 'single bed', 2000.00, 500.00);
 
-INSERT INTO Room (room_id, status, available, type, price, profit_per_room) VALUES
-(201, 'clean', 'yes', 'single bed', 2000.00, 500.00),
-(202, 'clean', 'yes', 'double bed', 3000.00, 800.00),
-(203, 'clean', 'yes', 'single bed', 2000.00, 500.00);
-
-
-
 select * from Room;
 
 -- Insert data into Customer table
@@ -277,6 +286,15 @@ SELECT
     e.emp_id,
     TIMESTAMPDIFF(YEAR, e.date_of_join, CURDATE()) as service_years
 FROM Employee e;
+
+CREATE VIEW EmployeeService AS
+SELECT
+    e.emp_id,
+    TIMESTAMPDIFF(YEAR, e.date_of_join, CURDATE()) AS service_years
+FROM Employee e;
+
+
+select * from EmployeeService;
 
 -- 2. Driver details with license
 SELECT
@@ -393,22 +411,14 @@ WHERE cus_id IN (
     )
 );
 
-create table hotel_login(
-	username varchar(10),
-    password int
-);
-
-select * from hotel_login;
-
-INSERT INTO hotel_login (username, password) VALUES
-("admin", 1234);
 
 select *
-from customer
+from customer;
 
 
 select *
-from reserve
+from reserve;
+
 
 
 

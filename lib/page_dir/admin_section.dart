@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_dbms/page_dir/employee.dart';
+import 'package:hotel_dbms/page_dir/room.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
+import 'department.dart';
 
 
 
@@ -170,6 +174,10 @@ class _AdminSection extends State<AdminSection> {
     );
   }
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,22 +201,85 @@ class _AdminSection extends State<AdminSection> {
                   leading: Icon(Icons.meeting_room),
                   title: Text('Rooms'),
                   onTap: () {
-                    setState(() {
-                      _selectedMenu = "Rooms";
-                      _employeeFilter = "All"; // Reset filter
-                    });
-                    fetchData("rooms"); // Fetch room data
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RoomPage(),
+                        ),
+                      );
+                    // Fetch room data
                   },
                 ),
+                // ListTile(
+                //   leading: Icon(Icons.people),
+                //   title: Text('Employees'),
+                //   onTap: () {
+                //     setState(() {
+                //       _selectedMenu = "Employees";
+                //       _employeeFilter = "All"; // Reset filter
+                //     });
+                //     fetchData("employees"); // Fetch all employee data
+                //   },
+                // ),
+
                 ListTile(
                   leading: Icon(Icons.people),
                   title: Text('Employees'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EmployeePage(),
+                      ),
+                    );
+                  },
+                ),
+
+                ListTile(
+                  leading: Icon(Icons.people),
+                  title: Text('Departments'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DepartmentPage(),
+                      ),
+                    );
+                  },
+                ),
+
+                ListTile(
+                  leading: Icon(Icons.people),
+                  title: Text('Customers'),
                   onTap: () {
                     setState(() {
                       _selectedMenu = "Employees";
                       _employeeFilter = "All"; // Reset filter
                     });
-                    fetchData("employees"); // Fetch all employee data
+                    fetchData("customers"); // Fetch all employee data
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.people),
+                  title: Text('Reservations'),
+                  onTap: () {
+                    setState(() {
+                      _selectedMenu = "Employees";
+                      _employeeFilter = "All"; // Reset filter
+                    });
+                    fetchData("reservations"); // Fetch all employee data
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.people),
+                  title: Text('Payments'),
+                  onTap: () {
+                    setState(() {
+                      _selectedMenu = "Employees";
+                      _employeeFilter = "All"; // Reset filter
+                    });
+                    fetchData("payments"); // Fetch all employee data
                   },
                 ),
               ],
@@ -245,6 +316,94 @@ class _AdminSection extends State<AdminSection> {
                                 ],
                               ),
                             SizedBox(height: 16),
+                            if (_selectedMenu == "Employees")
+                              Column(
+                                children: [
+                                  RadioListTile<String>(
+                                    title: Text("All Employees"),
+                                    value: "All",
+                                    groupValue: _employeeFilter,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _employeeFilter = value!;
+                                      });
+                                      fetchData(
+                                          "employees"); // Fetch all employees
+                                    },
+                                  ),
+                                  RadioListTile<String>(
+                                    title: Text("Drivers"),
+                                    value: "Drivers",
+                                    groupValue: _employeeFilter,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _employeeFilter = value!;
+                                      });
+                                      fetchData("drivers"); // Fetch drivers
+                                    },
+                                  ),
+                                ],
+                              ),
+                            // if (_selectedMenu == "Department")
+                            //   Row(
+                            //     children: [
+                            //       ElevatedButton(
+                            //         onPressed: () => _addDepartment(),
+                            //         child: Text("Add Department"),
+                            //       ),
+                            //       SizedBox(width: 10),
+                            //       ElevatedButton(
+                            //         onPressed: () => _deleteDepartment(),
+                            //         child: Text("Delete Department"),
+                            //       ),
+                            //       SizedBox(width: 10),
+                            //       ElevatedButton(
+                            //         onPressed: () => _updateDepartment(),
+                            //         child: Text("Update Department"),
+                            //       ),
+                            //     ],
+                            //   ),
+                            //
+                            // SizedBox(height: 16),
+                            // if (_selectedMenu == "Departments")
+                            //   Row(
+                            //     children: [
+                            //       ElevatedButton(
+                            //         onPressed: () => _showRoomForm(),
+                            //         child: Text('Add Room'),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // SizedBox(height: 16),
+                            // if (_selectedMenu == "Customers")
+                            //   Row(
+                            //     children: [
+                            //       ElevatedButton(
+                            //         onPressed: () => _showRoomForm(),
+                            //         child: Text('Add Room'),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // SizedBox(height: 16),
+                            // if (_selectedMenu == "Reservations")
+                            //   Row(
+                            //     children: [
+                            //       ElevatedButton(
+                            //         onPressed: () => _showRoomForm(),
+                            //         child: Text('Add Room'),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // if (_selectedMenu == "Payments")
+                            //   Row(
+                            //     children: [
+                            //       ElevatedButton(
+                            //         onPressed: () => _showRoomForm(),
+                            //         child: Text('Add Room'),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // SizedBox(height: 16),
                             // Expanded(
                             //     child: SingleChildScrollView(
                             //       scrollDirection: Axis.horizontal,
@@ -274,34 +433,7 @@ class _AdminSection extends State<AdminSection> {
                             //       ),
                             //     ),
                             // ),
-                            if (_selectedMenu == "Employees")
-                              Column(
-                                children: [
-                                  RadioListTile<String>(
-                                    title: Text("All Employees"),
-                                    value: "All",
-                                    groupValue: _employeeFilter,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _employeeFilter = value!;
-                                      });
-                                      fetchData(
-                                          "employees"); // Fetch all employees
-                                    },
-                                  ),
-                                  RadioListTile<String>(
-                                    title: Text("Drivers"),
-                                    value: "Drivers",
-                                    groupValue: _employeeFilter,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _employeeFilter = value!;
-                                      });
-                                      fetchData("drivers"); // Fetch drivers
-                                    },
-                                  ),
-                                ],
-                              ),
+
                             SizedBox(height: 16),
                             Expanded(
                               child: SingleChildScrollView(
@@ -341,3 +473,7 @@ class _AdminSection extends State<AdminSection> {
     );
   }
 }
+
+
+
+
