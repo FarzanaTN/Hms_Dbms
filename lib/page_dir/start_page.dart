@@ -826,6 +826,7 @@ class HotelWebPage extends StatelessWidget {
     String? gender;
     String? roomType;
     double totalBill = 10.0;
+    String?paymentMethod;
 
     // Add the _submitForm function inside to access the variables
     // void _submitForm() async {
@@ -960,6 +961,13 @@ class HotelWebPage extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           TextField(
+                            controller: lastNameController,
+                            decoration: InputDecoration(
+                              labelText: 'Last Name',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          TextField(
                             controller: emailController,
                             decoration: InputDecoration(
                               labelText: 'Email',
@@ -999,14 +1007,14 @@ class HotelWebPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextField(
-                            controller: lastNameController,
-                            decoration: InputDecoration(
-                              labelText: 'Last Name',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          SizedBox(height: 10),
+                          // TextField(
+                          //   controller: lastNameController,
+                          //   decoration: InputDecoration(
+                          //     labelText: 'Last Name',
+                          //     border: OutlineInputBorder(),
+                          //   ),
+                          // ),
+                          // SizedBox(height: 10),
                           DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText: 'Room Type',
@@ -1065,6 +1073,23 @@ class HotelWebPage extends StatelessWidget {
                                 checkOutDateController.text =
                                     selectedDate.toIso8601String().split('T').first;
                               }
+                            },
+                          ),
+                          SizedBox(height: 10,),
+                          DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              labelText: 'Payment Method',
+                              border: OutlineInputBorder(),
+                            ),
+                            value: paymentMethod,
+                            items: ['Cash', 'Banking/Others']
+                                .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(item),
+                            ))
+                                .toList(),
+                            onChanged: (value) {
+                              paymentMethod = value;
                             },
                           ),
                         ],
