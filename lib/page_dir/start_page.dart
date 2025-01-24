@@ -825,59 +825,107 @@ class HotelWebPage extends StatelessWidget {
     final checkOutDateController = TextEditingController();
     String? gender;
     String? roomType;
-    double totalBill = 0.0;
+    double totalBill = 10.0;
+    String?paymentMethod;
 
     // Add the _submitForm function inside to access the variables
+    // void _submitForm() async {
+    //   final customerUrl = Uri.parse('http://localhost:3000/addCustomer');
+    //   final reservationUrl = Uri.parse('http://localhost:3000/addReservation');
+    //
+    //   final customerResponse = await http.post(
+    //     customerUrl,
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: json.encode({
+    //       'first_name': firstNameController.text,
+    //       'last_name': lastNameController.text,
+    //       'gender': gender,
+    //       'email': emailController.text,
+    //       'phone': phoneController.text,
+    //       'rating': 0,
+    //     }),
+    //   );
+    //
+    //   if (customerResponse.statusCode == 201) {
+    //     final customerData = json.decode(customerResponse.body);
+    //     final cusId = customerData['cus_id'];
+    //
+    //     // Pass cusId to reservation API
+    //     final reservationResponse = await http.post(
+    //       reservationUrl,
+    //       headers: {'Content-Type': 'application/json'},
+    //       body: json.encode({
+    //         'cus_id': cusId,
+    //         'room_type': roomType,
+    //         'check_in_date': checkInDateController.text,
+    //         'check_out_date': checkOutDateController.text,
+    //         'total_bill': totalBill,
+    //       }),
+    //     );
+    //
+    //     if (reservationResponse.statusCode == 201) {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(content: Text('Reservation created successfully!')),
+    //       );
+    //     } else {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(content: Text('Failed to create reservation.')),
+    //       );
+    //     }
+    //   } else {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text('Failed to add customer.')),
+    //     );
+    //   }
+    //
+    // }
+
     void _submitForm() async {
-      final customerUrl = Uri.parse('http://localhost:3000/addCustomer');
-      final reservationUrl = Uri.parse('http://localhost:3000/addReservation');
+      final combinedUrl = Uri.parse('http://localhost:3000/addCustomerAndReservation');
 
-      final customerResponse = await http.post(
-        customerUrl,
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'first_name': firstNameController.text,
-          'last_name': lastNameController.text,
-          'gender': gender,
-          'email': emailController.text,
-          'phone': phoneController.text,
-          'rating': 0,
-        }),
-      );
+      // Prepare the request payload
+      final requestBody = {
+        'first_name': firstNameController.text,
+        'last_name': lastNameController.text,
+        'gender': gender,
+        'email': emailController.text,
+        'phone': phoneController.text,
+        'rating': 0,
+        'room_type': roomType,
+        'check_in_date': checkInDateController.text,
+        'check_out_date': checkOutDateController.text,
+        'total_bill': totalBill,
+      };
 
-      if (customerResponse.statusCode == 201) {
-        final customerData = json.decode(customerResponse.body);
-        final cusId = customerData['cus_id'];
-
-        // Pass cusId to reservation API
-        final reservationResponse = await http.post(
-          reservationUrl,
+      try {
+        // Send the request to the combined API
+        final response = await http.post(
+          combinedUrl,
           headers: {'Content-Type': 'application/json'},
-          body: json.encode({
-            'cus_id': cusId,
-            'room_type': roomType,
-            'check_in_date': checkInDateController.text,
-            'check_out_date': checkOutDateController.text,
-            'total_bill': totalBill,
-          }),
+          body: json.encode(requestBody),
         );
 
-        if (reservationResponse.statusCode == 201) {
+        if (response.statusCode == 201) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Reservation created successfully!')),
+          );
+        } else if (response.statusCode == 200) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Customer already exists. Reservation created successfully!')),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to create reservation.')),
           );
         }
-      } else {
+      } catch (e) {
+        print('Error: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to add customer.')),
+          SnackBar(content: Text('An error occurred while creating the reservation.')),
         );
       }
-
     }
+
 
     showDialog(
       context: context,
@@ -912,6 +960,13 @@ class HotelWebPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 10),
+                          TextField(
+                            controller: lastNameController,
+                            decoration: InputDecoration(
+                              labelText: 'Last Name',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
                           TextField(
                             controller: emailController,
                             decoration: InputDecoration(
@@ -952,14 +1007,14 @@ class HotelWebPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextField(
-                            controller: lastNameController,
-                            decoration: InputDecoration(
-                              labelText: 'Last Name',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          SizedBox(height: 10),
+                          // TextField(
+                          //   controller: lastNameController,
+                          //   decoration: InputDecoration(
+                          //     labelText: 'Last Name',
+                          //     border: OutlineInputBorder(),
+                          //   ),
+                          // ),
+                          // SizedBox(height: 10),
                           DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText: 'Room Type',
@@ -1018,6 +1073,23 @@ class HotelWebPage extends StatelessWidget {
                                 checkOutDateController.text =
                                     selectedDate.toIso8601String().split('T').first;
                               }
+                            },
+                          ),
+                          SizedBox(height: 10,),
+                          DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              labelText: 'Payment Method',
+                              border: OutlineInputBorder(),
+                            ),
+                            value: paymentMethod,
+                            items: ['Cash', 'Banking/Others']
+                                .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(item),
+                            ))
+                                .toList(),
+                            onChanged: (value) {
+                              paymentMethod = value;
                             },
                           ),
                         ],
