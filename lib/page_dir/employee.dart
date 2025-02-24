@@ -155,6 +155,8 @@ class _EmployeePageState extends State<EmployeePage> {
 
 
 
+
+
   // Function to clear form fields
   void _clearFields() {
     setState(() {
@@ -227,6 +229,7 @@ class _EmployeePageState extends State<EmployeePage> {
       }
     }
     else if (selectedAction == "Update") {
+      print("yeee");
       if (empId != null && serviceLength != null && percentageIncrease != null) {
         updateAllEmployeesSalary( serviceLength!, percentageIncrease!);
       } else {
@@ -317,8 +320,10 @@ class _EmployeePageState extends State<EmployeePage> {
                   },
                 ),
                 Text("Update"),
+
               ],
             ),
+
 
 
             if (selectedAction == "Delete") ...[
@@ -908,9 +913,18 @@ class _EmployeePageState extends State<EmployeePage> {
                 ),
               ),
             ],
+
+
+
+
+
+
           ],
         ),
       ),
     );
   }
 }
+
+
+
