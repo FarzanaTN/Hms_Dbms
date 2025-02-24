@@ -377,231 +377,450 @@ class _EmployeePageState extends State<EmployeePage> {
 
             // Form for Add, Delete, or Update actions
 
+            // if (selectedAction == "Add") ...[
+            //   SizedBox(height: 20),
+            //   // Employee ID
+            //   TextField(
+            //     decoration: InputDecoration(
+            //       labelText: "Employee ID",
+            //     ),
+            //     onChanged: (value) {
+            //       empId = value;
+            //     },
+            //   ),
+            //   SizedBox(height: 20),
+            //
+            //   // First Name and Last Name
+            //   Row(
+            //     children: [
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "First Name",
+            //           ),
+            //           onChanged: (value) {
+            //             firstName = value;
+            //           },
+            //         ),
+            //       ),
+            //       SizedBox(width: 10),
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Last Name",
+            //           ),
+            //           onChanged: (value) {
+            //             lastName = value;
+            //           },
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            //   SizedBox(height: 20),
+            //
+            //   // Gender
+            //   // Gender
+            //   DropdownButton<String>(
+            //     value: gender,
+            //     hint: Text('Select Gender'),
+            //     onChanged: (String? newValue) {
+            //       setState(() {
+            //         gender = newValue!;
+            //       });
+            //     },
+            //     items: <String>['Male', 'Female', 'Other']
+            //         .map<DropdownMenuItem<String>>((String value) {
+            //       return DropdownMenuItem<String>(
+            //         value: value,
+            //         child: Text(value),
+            //       );
+            //     }).toList(),
+            //   ),
+            //   SizedBox(height: 16),
+            //
+            //   // Date of Birth and Date of Join
+            //   Row(
+            //     children: [
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Date of Birth",
+            //           ),
+            //           onChanged: (value) {
+            //             dateOfBirth = value;
+            //           },
+            //         ),
+            //       ),
+            //       SizedBox(width: 10),
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Date of Join",
+            //           ),
+            //           onChanged: (value) {
+            //             dateOfJoin = value;
+            //           },
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            //   SizedBox(height: 20),
+            //
+            //   // Contact Information
+            //   Row(
+            //     children: [
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Phone",
+            //           ),
+            //           onChanged: (value) {
+            //             phone = value;
+            //           },
+            //         ),
+            //       ),
+            //       SizedBox(height: 10),
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Email",
+            //           ),
+            //           onChanged: (value) {
+            //             email = value;
+            //           },
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            //
+            //   SizedBox(height: 20),
+            //
+            //   // Address Information
+            //   Row(
+            //     children: [
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "House No",
+            //           ),
+            //           onChanged: (value) {
+            //             houseNo = value;
+            //           },
+            //         ),
+            //       ),
+            //       SizedBox(height: 10),
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Street Name",
+            //           ),
+            //           onChanged: (value) {
+            //             streetName = value;
+            //           },
+            //         ),
+            //       ),
+            //       SizedBox(height: 10),
+            //       Expanded(
+            //         child: TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "City",
+            //           ),
+            //           onChanged: (value) {
+            //             city = value;
+            //           },
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            //
+            //   SizedBox(height: 10),
+            //   Row(
+            //       children: [
+            //     Expanded(
+            //       child:
+            //         TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Postal Code",
+            //           ),
+            //           onChanged: (value) {
+            //             postalCode = value;
+            //           },
+            //         ),
+            //
+            //     ),
+            //     SizedBox(height: 10),
+            //     Expanded(
+            //       child: TextField(
+            //         decoration: InputDecoration(
+            //           labelText: "District",
+            //         ),
+            //         onChanged: (value) {
+            //           district = value;
+            //         },
+            //       ),
+            //     ),
+            //     SizedBox(height: 10),
+            //     Expanded(
+            //       child:
+            //         TextField(
+            //           decoration: InputDecoration(
+            //             labelText: "Division",
+            //           ),
+            //           onChanged: (value) {
+            //             division = value;
+            //           },
+            //         ),
+            //
+            //     ),
+            //   ]),
+            //
+            //   SizedBox(height: 20),
+            //
+            //   // Other Information
+            //   TextField(
+            //     decoration: InputDecoration(
+            //       labelText: "NID",
+            //     ),
+            //     onChanged: (value) {
+            //       nid = value;
+            //     },
+            //   ),
+            //   SizedBox(height: 10),
+            //   TextField(
+            //     decoration: InputDecoration(
+            //       labelText: "Department Name",
+            //     ),
+            //     onChanged: (value) {
+            //       deptName = value;
+            //     },
+            //   ),
+            //   SizedBox(height: 10),
+            //   TextField(
+            //     decoration: InputDecoration(
+            //       labelText: "Salary",
+            //     ),
+            //     onChanged: (value) {
+            //       salary = value;
+            //     },
+            //   ),
+            //   SizedBox(height: 20),
+            //
+            //   // Submit Button
+            //   ElevatedButton(
+            //     onPressed: handleAction,
+            //     child: Text("Submit"),
+            //   ),
+            // ],
             if (selectedAction == "Add") ...[
               SizedBox(height: 20),
-              // Employee ID
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Employee ID",
-                ),
-                onChanged: (value) {
-                  empId = value;
-                },
-              ),
-              SizedBox(height: 20),
-
-              // First Name and Last Name
+              // Form divided into 3 columns
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // First Column
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "First Name",
-                      ),
-                      onChanged: (value) {
-                        firstName = value;
-                      },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Employee ID",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            empId = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "First Name",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            firstName = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Last Name",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            lastName = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Date of Birth",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            dateOfBirth = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        DropdownButtonFormField<String>(
+                          decoration: InputDecoration(
+                            labelText: "Gender",
+                            border: OutlineInputBorder(),
+                          ),
+                          value: gender,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              gender = newValue!;
+                            });
+                          },
+                          items: ['Male', 'Female', 'Other']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 20),
+                  // Second Column
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Last Name",
-                      ),
-                      onChanged: (value) {
-                        lastName = value;
-                      },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Phone",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            phone = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "NID",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            nid = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            email = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Date of Join",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            dateOfJoin = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Department Name",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            deptName = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Salary",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            salary = value;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  // Third Column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "House No",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            houseNo = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Street Name",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            streetName = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Postal Code",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            postalCode = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "City",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            city = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "District",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            district = value;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Division",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            division = value;
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ],
-              ),
-              SizedBox(height: 20),
-
-              // Gender
-              // Gender
-              DropdownButton<String>(
-                value: gender,
-                hint: Text('Select Gender'),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    gender = newValue!;
-                  });
-                },
-                items: <String>['Male', 'Female', 'Other']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 16),
-
-              // Date of Birth and Date of Join
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Date of Birth",
-                      ),
-                      onChanged: (value) {
-                        dateOfBirth = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Date of Join",
-                      ),
-                      onChanged: (value) {
-                        dateOfJoin = value;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-
-              // Contact Information
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Phone",
-                      ),
-                      onChanged: (value) {
-                        phone = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                      ),
-                      onChanged: (value) {
-                        email = value;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 20),
-
-              // Address Information
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "House No",
-                      ),
-                      onChanged: (value) {
-                        houseNo = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Street Name",
-                      ),
-                      onChanged: (value) {
-                        streetName = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "City",
-                      ),
-                      onChanged: (value) {
-                        city = value;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 10),
-              Row(
-                  children: [
-                Expanded(
-                  child:
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Postal Code",
-                      ),
-                      onChanged: (value) {
-                        postalCode = value;
-                      },
-                    ),
-
-                ),
-                SizedBox(height: 10),
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: "District",
-                    ),
-                    onChanged: (value) {
-                      district = value;
-                    },
-                  ),
-                ),
-                SizedBox(height: 10),
-                Expanded(
-                  child:
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Division",
-                      ),
-                      onChanged: (value) {
-                        division = value;
-                      },
-                    ),
-
-                ),
-              ]),
-
-              SizedBox(height: 20),
-
-              // Other Information
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "NID",
-                ),
-                onChanged: (value) {
-                  nid = value;
-                },
-              ),
-              SizedBox(height: 10),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Department Name",
-                ),
-                onChanged: (value) {
-                  deptName = value;
-                },
-              ),
-              SizedBox(height: 10),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Salary",
-                ),
-                onChanged: (value) {
-                  salary = value;
-                },
               ),
               SizedBox(height: 20),
 
@@ -612,40 +831,79 @@ class _EmployeePageState extends State<EmployeePage> {
               ),
             ],
 
+
             if (selectedAction == "View") ...[
               SizedBox(height: 16),
+              // Expanded(
+              //   child: SingleChildScrollView(
+              //     scrollDirection: Axis.horizontal, // For horizontal scrolling
+              //     child: DataTable(
+              //       columns: [
+              //         DataColumn(label: Text("ID")),
+              //         DataColumn(label: Text("First Name")),
+              //         DataColumn(label: Text("Last Name")),
+              //         DataColumn(label: Text("Gender")),
+              //         DataColumn(label: Text("Date of Birth")),
+              //         DataColumn(label: Text("Date of Join")),
+              //         DataColumn(label: Text("Phone")),
+              //         DataColumn(label: Text("Email")),
+              //         DataColumn(label: Text("Department")),
+              //         DataColumn(label: Text("Salary")),
+              //       ],
+              //       rows: employees.map((employee) {
+              //         return DataRow(
+              //           cells: [
+              //             DataCell(Text(employee['emp_id']?.toString() ?? "")),
+              //             DataCell(Text(employee['first_name'] ?? "")),
+              //             DataCell(Text(employee['last_name'] ?? "")),
+              //             DataCell(Text(employee['gender'] ?? "")),
+              //             DataCell(Text(employee['date_of_birth'] ?? "")),
+              //             DataCell(Text(employee['date_of_join'] ?? "")),
+              //             DataCell(Text(employee['phone'] ?? "")),
+              //             DataCell(Text(employee['email'] ?? "")),
+              //             DataCell(Text(employee['dept_name'] ?? "")),
+              //             DataCell(Text(employee['salary']?.toString() ?? "")),
+              //           ],
+              //         );
+              //       }).toList(),
+              //     ),
+              //   ),
+              // ),
               Expanded(
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal, // For horizontal scrolling
-                  child: DataTable(
-                    columns: [
-                      DataColumn(label: Text("ID")),
-                      DataColumn(label: Text("First Name")),
-                      DataColumn(label: Text("Last Name")),
-                      DataColumn(label: Text("Gender")),
-                      DataColumn(label: Text("Date of Birth")),
-                      DataColumn(label: Text("Date of Join")),
-                      DataColumn(label: Text("Phone")),
-                      DataColumn(label: Text("Email")),
-                      DataColumn(label: Text("Department")),
-                      DataColumn(label: Text("Salary")),
-                    ],
-                    rows: employees.map((employee) {
-                      return DataRow(
-                        cells: [
-                          DataCell(Text(employee['emp_id']?.toString() ?? "")),
-                          DataCell(Text(employee['first_name'] ?? "")),
-                          DataCell(Text(employee['last_name'] ?? "")),
-                          DataCell(Text(employee['gender'] ?? "")),
-                          DataCell(Text(employee['date_of_birth'] ?? "")),
-                          DataCell(Text(employee['date_of_join'] ?? "")),
-                          DataCell(Text(employee['phone'] ?? "")),
-                          DataCell(Text(employee['email'] ?? "")),
-                          DataCell(Text(employee['dept_name'] ?? "")),
-                          DataCell(Text(employee['salary']?.toString() ?? "")),
-                        ],
-                      );
-                    }).toList(),
+                  scrollDirection: Axis.vertical, // Enable vertical scrolling
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+                    child: DataTable(
+                      columns: const [
+                        DataColumn(label: Text("ID")),
+                        DataColumn(label: Text("First Name")),
+                        DataColumn(label: Text("Last Name")),
+                        DataColumn(label: Text("Gender")),
+                        DataColumn(label: Text("Date of Birth")),
+                        DataColumn(label: Text("Date of Join")),
+                        DataColumn(label: Text("Phone")),
+                        DataColumn(label: Text("Email")),
+                        DataColumn(label: Text("Department")),
+                        DataColumn(label: Text("Salary")),
+                      ],
+                      rows: employees.map((employee) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(employee['emp_id']?.toString() ?? "")),
+                            DataCell(Text(employee['first_name'] ?? "")),
+                            DataCell(Text(employee['last_name'] ?? "")),
+                            DataCell(Text(employee['gender'] ?? "")),
+                            DataCell(Text(employee['date_of_birth'] ?? "")),
+                            DataCell(Text(employee['date_of_join'] ?? "")),
+                            DataCell(Text(employee['phone'] ?? "")),
+                            DataCell(Text(employee['email'] ?? "")),
+                            DataCell(Text(employee['dept_name'] ?? "")),
+                            DataCell(Text(employee['salary']?.toString() ?? "")),
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
               ),

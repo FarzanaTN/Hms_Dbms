@@ -248,14 +248,16 @@ class _DepartmentPageState extends State<DepartmentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Department Management"),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Radio buttons for selecting actions
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Radio<String>(
                   value: "View",

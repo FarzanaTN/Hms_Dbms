@@ -600,39 +600,78 @@ class _RoomPageState extends State<RoomPage> {
             // Display the rooms in a table format
             if (selectedAction == "View") ...[
               SizedBox(height: 20),
+              // Expanded(
+              //   child: SingleChildScrollView(
+              //     scrollDirection: Axis.horizontal,
+              //     child: DataTable(
+              //       columns: const [
+              //         DataColumn(label: Text('Room ID')),
+              //         DataColumn(label: Text('Type')),
+              //         DataColumn(label: Text('Status')),
+              //         DataColumn(label: Text('Available')),
+              //         DataColumn(label: Text('Price')),
+              //         DataColumn(label: Text('Profit')),
+              //         DataColumn(label: Text('Actions')),
+              //       ],
+              //       rows: rooms.map<DataRow>((room) {
+              //         return DataRow(
+              //           cells: [
+              //             DataCell(Text(room['room_id'].toString())),
+              //             DataCell(Text(room['type'])),
+              //             DataCell(Text(room['status'])),
+              //             DataCell(Text(room['available'])),
+              //             DataCell(Text('\$${room['price']}')),
+              //             DataCell(Text('\$${room['profit_per_room']}')),
+              //             DataCell(IconButton(
+              //               icon: Icon(Icons.delete),
+              //               onPressed: () => _showConfirmationDialog(
+              //                 "Delete Room",
+              //                 "Are you sure you want to delete this room?",
+              //                 () => deleteRoom(room['room_id']),
+              //               ),
+              //             )),
+              //           ],
+              //         );
+              //       }).toList(),
+              //     ),
+              //   ),
+              // ),
               Expanded(
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Room ID')),
-                      DataColumn(label: Text('Type')),
-                      DataColumn(label: Text('Status')),
-                      DataColumn(label: Text('Available')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Profit')),
-                      DataColumn(label: Text('Actions')),
-                    ],
-                    rows: rooms.map<DataRow>((room) {
-                      return DataRow(
-                        cells: [
-                          DataCell(Text(room['room_id'].toString())),
-                          DataCell(Text(room['type'])),
-                          DataCell(Text(room['status'])),
-                          DataCell(Text(room['available'])),
-                          DataCell(Text('\$${room['price']}')),
-                          DataCell(Text('\$${room['profit_per_room']}')),
-                          DataCell(IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () => _showConfirmationDialog(
-                              "Delete Room",
-                              "Are you sure you want to delete this room?",
-                              () => deleteRoom(room['room_id']),
-                            ),
-                          )),
-                        ],
-                      );
-                    }).toList(),
+                  scrollDirection: Axis.vertical, // Vertical scrolling
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal, // Horizontal scrolling
+                    child: DataTable(
+                      columns: const [
+                        DataColumn(label: Text('Room ID')),
+                        DataColumn(label: Text('Type')),
+                        DataColumn(label: Text('Status')),
+                        DataColumn(label: Text('Available')),
+                        DataColumn(label: Text('Price')),
+                        DataColumn(label: Text('Profit')),
+                        DataColumn(label: Text('Actions')),
+                      ],
+                      rows: rooms.map<DataRow>((room) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(room['room_id'].toString())),
+                            DataCell(Text(room['type'])),
+                            DataCell(Text(room['status'])),
+                            DataCell(Text(room['available'])),
+                            DataCell(Text('\$${room['price']}')),
+                            DataCell(Text('\$${room['profit_per_room']}')),
+                            DataCell(IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () => _showConfirmationDialog(
+                                "Delete Room",
+                                "Are you sure you want to delete this room?",
+                                    () => deleteRoom(room['room_id']),
+                              ),
+                            )),
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
               ),
