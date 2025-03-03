@@ -480,6 +480,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:hotel_dbms/page_dir/DeptAvgSalary.dart';
+import 'package:hotel_dbms/page_dir/DeptSortByBudget.dart';
+import 'package:hotel_dbms/page_dir/DirtyRooms.dart';
 import 'package:hotel_dbms/page_dir/employee.dart';
 import 'package:hotel_dbms/page_dir/room.dart';
 import 'package:hotel_dbms/page_dir/department.dart';
@@ -488,6 +491,10 @@ import 'EmployeeCounttByDeptPage.dart';
 import 'MaximumSalaryPage.dart';
 import 'ProfitPerMonthPage.dart';
 import 'current_customers.dart';
+import 'ServiceLength.dart';
+import 'DriverDetails.dart';
+import 'AvailableRooms.dart';
+
 
 class AdminSection extends StatefulWidget {
   @override
@@ -509,7 +516,13 @@ class _AdminSection extends State<AdminSection> {
     CurrentCustomersPage(), // New "Current Customers" page
     EmployeeCountByDeptPage(), // New "Employee Count by Department" page
     ProfitPerMonthPage(), // New "Profit Per Month" page
-    MaximumSalaryPage(), // New "Maximum Salary" page
+    MaximumSalaryPage(),
+    Servicelength(),
+    Driverdetails(),
+    Deptavgsalary(),
+    Availablerooms(),
+    Dirtyrooms(),
+    Deptsortbybudget()
   ];
 
   @override
@@ -628,6 +641,60 @@ class _AdminSection extends State<AdminSection> {
                     onTap: () {
                       setState(() {
                         _selectedIndex = 10;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.room_service),
+                    title: const Text('Service Length of Employee'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 11;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.drive_eta),
+                    title: const Text('Driver Info'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 12;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.money),
+                    title: const Text('Dept Avg salary'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 13;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.event_available),
+                    title: const Text('Available Room'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 14;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.dirty_lens),
+                    title: const Text('Dirty Room'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 15;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.sort),
+                    title: const Text('Sort Dept by Budget'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 16;
                       });
                     },
                   ),
