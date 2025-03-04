@@ -226,7 +226,7 @@ class MyApp extends StatelessWidget {
       title: 'Hotel Management System',
       initialRoute: '/',
       routes: {
-        '/': (context) => HotelWebPage(), // Your home page widget
+        '/': (context) => HotelHomePage(), // Your home page widget
         '/adminsection': (context) => AdminSection(), // Admin section page
       },
     );

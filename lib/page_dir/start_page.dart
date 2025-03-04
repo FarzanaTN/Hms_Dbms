@@ -1,741 +1,34 @@
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
-//
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'book_now.dart';
-//
-// class HotelWebPage extends StatelessWidget {
-//
-//   // void _showLoginPopup(BuildContext context) {
-//   //   showDialog(
-//   //     context: context,
-//   //     builder: (BuildContext context) {
-//   //       return AlertDialog(
-//   //         shape: RoundedRectangleBorder(
-//   //           borderRadius: BorderRadius.circular(20.0),
-//   //         ),
-//   //         title: Text('Welcome Admin'),
-//   //         content: Column(
-//   //           mainAxisSize: MainAxisSize.min,
-//   //           children: [
-//   //             TextField(
-//   //               decoration: InputDecoration(
-//   //                 labelText: 'Username',
-//   //                 border: OutlineInputBorder(),
-//   //               ),
-//   //             ),
-//   //             SizedBox(height: 10),
-//   //             TextField(
-//   //               obscureText: true,
-//   //               decoration: InputDecoration(
-//   //                 labelText: 'Password',
-//   //                 border: OutlineInputBorder(),
-//   //               ),
-//   //             ),
-//   //           ],
-//   //         ),
-//   //         actions: [
-//   //           TextButton(
-//   //             onPressed: () {
-//   //               Navigator.of(context).pop();
-//   //             },
-//   //             child: Text('Cancel'),
-//   //           ),
-//   //           ElevatedButton(
-//   //             onPressed: () {
-//   //               // Add login logic here
-//   //               Navigator.of(context).pop();
-//   //             },
-//   //             child: Text('Submit'),
-//   //           ),
-//   //         ],
-//   //       );
-//   //     },
-//   //   );
-//   // }
-//
-//
-//
-//
-//
-//   void _showBookingPopup(BuildContext context) {
-//     final firstNameController = TextEditingController();
-//     final lastNameController = TextEditingController();
-//     final emailController = TextEditingController();
-//     final phoneController = TextEditingController();
-//     DateTime? checkInDate;
-//     DateTime? checkOutDate;
-//     String? gender;
-//     String? roomType;
-//     double totalBill = 0.0;
-//
-//     void _showLoginPopup(BuildContext context) {
-//       final usernameController = TextEditingController();
-//       final passwordController = TextEditingController();
-//
-//       void _submitForm() async {
-//         final url = Uri.parse('http://localhost:3000/addCustomer');
-//
-//         final response = await http.post(
-//           url,
-//           headers: {'Content-Type': 'application/json'},
-//           body: json.encode({
-//             'first_name': firstNameController.text,
-//             'last_name': lastNameController.text,
-//             'gender': gender,
-//             'email': emailController.text,
-//             'phone': phoneController.text,
-//             'rating': 0, // Default rating
-//             'room_id': selectedRoomId, // Pass the selected room ID
-//             'check_in_date': checkInDate?.toIso8601String(),
-//             'check_out_date': checkOutDate?.toIso8601String(),
-//             'total_bill': totalBill,
-//           }),
-//         );
-//
-//         if (response.statusCode == 201) {
-//           ScaffoldMessenger.of(context).showSnackBar(
-//             SnackBar(content: Text('Customer and reservation added successfully!')),
-//           );
-//         } else {
-//           ScaffoldMessenger.of(context).showSnackBar(
-//             SnackBar(content: Text('Failed to add customer and reservation.')),
-//           );
-//         }
-//       }
-//
-//
-//       showDialog(
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(20.0),
-//             ),
-//             title: Text('Welcome Admin'),
-//             content: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 TextField(
-//                   controller: usernameController,
-//                   decoration: InputDecoration(
-//                     labelText: 'Username',
-//                     border: OutlineInputBorder(),
-//                   ),
-//                 ),
-//                 SizedBox(height: 10),
-//                 TextField(
-//                   controller: passwordController,
-//                   obscureText: true,
-//                   decoration: InputDecoration(
-//                     labelText: 'Password',
-//                     border: OutlineInputBorder(),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             actions: [
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop();
-//                 },
-//                 child: Text('Cancel'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () async {
-//                   final username = usernameController.text;
-//                   final password = passwordController.text;
-//
-//                   // API URL for login validation
-//                   final url = Uri.parse('http://localhost:3000/login'); // Adjust if your backend is running on a different host
-//
-//                   // Send the POST request to validate login credentials
-//                   final response = await http.post(
-//                     url,
-//                     headers: {'Content-Type': 'application/json'},
-//                     body: json.encode({
-//                       'username': username,
-//                       'password': password,
-//                     }),
-//                   );
-//
-//                   if (response.statusCode == 200) {
-//                     // Navigate to the adminsection page on successful login
-//                     Navigator.of(context).pop(); // Close the login dialog
-//                     Navigator.pushReplacementNamed(context, '/adminsection');
-//                   } else {
-//                     // Show an error if credentials are invalid
-//                     ScaffoldMessenger.of(context).showSnackBar(
-//                       SnackBar(content: Text('Invalid credentials')),
-//                     );
-//                   }
-//                 },
-//                 child: Text('Submit'),
-//               ),
-//             ],
-//           );
-//         },
-//       );
-//     }
-//
-//
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return Dialog(
-//             borderRadius: BorderRadius.circular(20.0),
-//           ),
-//           child: Container(
-//             width: MediaQuery.of(context).size.width * 0.7, // 70% of screen width
-//             padding: EdgeInsets.all(20.0),
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 Text(
-//                   'Welcome to our hotel',
-//                   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-//                 ),
-//                 SizedBox(height: 20),
-//                 Row(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Expanded(
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           TextField(
-//                             controller: firstNameController,
-//                             decoration: InputDecoration(
-//                               labelText: 'First Name',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                           ),
-//                           SizedBox(height: 10),
-//                           TextField(
-//                             controller: emailController,
-//                             decoration: InputDecoration(
-//                               labelText: 'Email',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                           ),
-//                           SizedBox(height: 10),
-//                           DropdownButtonFormField<String>(
-//                             decoration: InputDecoration(
-//                               labelText: 'Gender',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                             value: gender,
-//                             items: ['Male', 'Female']
-//                                 .map((gender) => DropdownMenuItem(
-//                               value: gender,
-//                               child: Text(gender),
-//                             ))
-//                                 .toList(),
-//                             onChanged: (value) {
-//                               gender = value;
-//                             },
-//                           ),
-//                           SizedBox(height: 10),
-//                           TextField(
-//                             controller: phoneController,
-//                             decoration: InputDecoration(
-//                               labelText: 'Phone',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(width: 20),
-//                     Expanded(
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           TextField(
-//                             controller: lastNameController,
-//                             decoration: InputDecoration(
-//                               labelText: 'Last Name',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                           ),
-//                           SizedBox(height: 10),
-//                           DropdownButtonFormField<String>(
-//                             decoration: InputDecoration(
-//                               labelText: 'Room Type',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                             value: roomType,
-//                             items: ['Single Bed', 'Double Bed']
-//                                 .map((room) => DropdownMenuItem(
-//                               value: room,
-//                               child: Text(room),
-//                             ))
-//                                 .toList(),
-//                             onChanged: (value) {
-//                               roomType = value;
-//                             },
-//                           ),
-//                           SizedBox(height: 10),
-//                           TextField(
-//                             readOnly: true,
-//                             decoration: InputDecoration(
-//                               labelText: 'Check-in Date',
-//                               border: OutlineInputBorder(),
-//                               suffixIcon: Icon(Icons.calendar_today),
-//                             ),
-//                             onTap: () async {
-//                               checkInDate = await showDatePicker(
-//                                 context: context,
-//                                 initialDate: DateTime.now(),
-//                                 firstDate: DateTime.now(),
-//                                 lastDate: DateTime(2100),
-//                               );
-//                             },
-//                           ),
-//                           SizedBox(height: 10),
-//                           TextField(
-//                             readOnly: true,
-//                             decoration: InputDecoration(
-//                               labelText: 'Check-out Date',
-//                               border: OutlineInputBorder(),
-//                               suffixIcon: Icon(Icons.calendar_today),
-//                             ),
-//                             onTap: () async {
-//                               checkOutDate = await showDatePicker(
-//                                 context: context,
-//                                 initialDate: checkInDate ?? DateTime.now(),
-//                                 firstDate: checkInDate ?? DateTime.now(),
-//                                 lastDate: DateTime(2100),
-//                               );
-//                             },
-//                           ),
-//                           SizedBox(height: 10),
-//                           Text(
-//                             'Total Bill: \$${totalBill.toStringAsFixed(2)}',
-//                             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 SizedBox(height: 20),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.center, // Center the buttons
-//                   children: [
-//                     ElevatedButton(
-//                       onPressed: () {
-//                         // Confirm action (example logic, modify as needed)
-//                         ScaffoldMessenger.of(context).showSnackBar(
-//                           SnackBar(content: Text('Booking confirmed successfully!')),
-//                         );
-//                         Navigator.of(context).pop();
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-//                       ),
-//                       child: Text('Cancel'),
-//                     ),
-//                     SizedBox(width: 20), // Space between buttons
-//                     ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.of(context).pop();
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-//                       ),
-//                       child: Text('Confirm'),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           // Background Image
-//           Container(
-//             decoration: BoxDecoration(
-//               image: DecorationImage(
-//                 image: AssetImage('assets/h1.jpg'), // Replace with your image
-//                 fit: BoxFit.cover,
-//               ),
-//             ),
-//           ),
-//           Column(
-//             children: [
-//               // Navigation Bar
-//               Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 20.0),
-//                 color: Colors.white.withOpacity(0.9),
-//                 height: 80.0,
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text(
-//                       'HB Website',
-//                       style: TextStyle(
-//                         fontSize: 24.0,
-//                         fontWeight: FontWeight.bold,
-//                       ),
-//                     ),
-//                     Row(
-//                       children: [
-//                         TextButton(
-//                           onPressed: () {},
-//                           child: Text('Home'),
-//                         ),
-//                         SizedBox(width: 10),
-//                         TextButton(
-//                           onPressed: () {},
-//                           child: Text('Rooms'),
-//                         ),
-//                         SizedBox(width: 10),
-//                         TextButton(
-//                           onPressed: () {},
-//                           child: Text('Facilities'),
-//                         ),
-//                         SizedBox(width: 10),
-//                         TextButton(
-//                           onPressed: () {},
-//                           child: Text('Contact Us'),
-//                         ),
-//                         SizedBox(width: 10),
-//                         TextButton(
-//                           onPressed: () {},
-//                           child: Text('About'),
-//                         ),
-//                         SizedBox(width: 20),
-//                         ElevatedButton(
-//                           onPressed: () {
-//                             _showBookingPopup(context);
-//                           },
-//                           style: ElevatedButton.styleFrom(
-//                             shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.zero,
-//                             ),
-//                           ),
-//                           child: Text('Book Now'),
-//                         ),
-//                         SizedBox(width: 10),
-//                         ElevatedButton(
-//                           onPressed: () {
-//                             _showLoginPopup(context);
-//                           },
-//                           style: ElevatedButton.styleFrom(
-//                             shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.zero,
-//                             ),
-//                           ),
-//                           child: Text('Login'),
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//
-//               // Spacer
-//               Spacer(),
-//
-//               // Search Card
-//               Container(
-//                 margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
-//                 padding: EdgeInsets.all(20.0),
-//                 decoration: BoxDecoration(
-//                   color: Colors.white.withOpacity(0.9),
-//                   borderRadius: BorderRadius.circular(15.0),
-//                   boxShadow: [
-//                     BoxShadow(
-//                       color: Colors.black26,
-//                       blurRadius: 10.0,
-//                       offset: Offset(0, 5),
-//                     ),
-//                   ],
-//                 ),
-//                 child: Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     Text(
-//                       'Check Booking Availability',
-//                       style: TextStyle(
-//                         fontSize: 20.0,
-//                         fontWeight: FontWeight.bold,
-//                       ),
-//                     ),
-//                     SizedBox(height: 20.0),
-//                     Row(
-//                       children: [
-//                         Expanded(
-//                           child: TextField(
-//                             decoration: InputDecoration(
-//                               labelText: 'Check-in',
-//                               border: OutlineInputBorder(),
-//                               suffixIcon: Icon(Icons.calendar_today),
-//                             ),
-//                           ),
-//                         ),
-//                         SizedBox(width: 10.0),
-//                         Expanded(
-//                           child: TextField(
-//                             decoration: InputDecoration(
-//                               labelText: 'Check-out',
-//                               border: OutlineInputBorder(),
-//                               suffixIcon: Icon(Icons.calendar_today),
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     SizedBox(height: 10.0),
-//                     Row(
-//                       children: [
-//                         Expanded(
-//                           child: TextField(
-//                             decoration: InputDecoration(
-//                               labelText: 'Adult',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                           ),
-//                         ),
-//                         SizedBox(width: 10.0),
-//                         Expanded(
-//                           child: TextField(
-//                             decoration: InputDecoration(
-//                               labelText: 'Children',
-//                               border: OutlineInputBorder(),
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     SizedBox(height: 20.0),
-//                     ElevatedButton(
-//                       onPressed: () {},
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: Colors.green,
-//                         padding: EdgeInsets.symmetric(
-//                           horizontal: 40.0,
-//                           vertical: 15.0,
-//                         ),
-//                       ),
-//                       child: Text(
-//                         'Submit',
-//                         style: TextStyle(
-//                           fontSize: 16.0,
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-//
-
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class HotelWebPage extends StatelessWidget {
-  // void _showBookingPopup(BuildContext context) {
-  //   final firstNameController = TextEditingController();
-  //   final lastNameController = TextEditingController();
-  //   final emailController = TextEditingController();
-  //   final phoneController = TextEditingController();
-  //   DateTime? checkInDate;
-  //   DateTime? checkOutDate;
-  //   String? gender;
-  //   String? roomType;
-  //
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Dialog(
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(20.0),
-  //         ),
-  //         child: Container(
-  //           width: MediaQuery.of(context).size.width * 0.7,
-  //           padding: EdgeInsets.all(20.0),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               Text(
-  //                 'Welcome to our hotel',
-  //                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-  //               ),
-  //               SizedBox(height: 20),
-  //               Row(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Expanded(
-  //                     child: Column(
-  //                       crossAxisAlignment: CrossAxisAlignment.start,
-  //                       children: [
-  //                         TextField(
-  //                           controller: firstNameController,
-  //                           decoration: InputDecoration(
-  //                             labelText: 'First Name',
-  //                             border: OutlineInputBorder(),
-  //                           ),
-  //                         ),
-  //                         SizedBox(height: 10),
-  //                         TextField(
-  //                           controller: emailController,
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Email',
-  //                             border: OutlineInputBorder(),
-  //                           ),
-  //                         ),
-  //                         SizedBox(height: 10),
-  //                         DropdownButtonFormField<String>(
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Gender',
-  //                             border: OutlineInputBorder(),
-  //                           ),
-  //                           value: gender,
-  //                           items: ['Male', 'Female']
-  //                               .map((item) => DropdownMenuItem(
-  //                             value: item,
-  //                             child: Text(item),
-  //                           ))
-  //                               .toList(),
-  //                           onChanged: (value) {
-  //                             gender = value;
-  //                           },
-  //                         ),
-  //                         SizedBox(height: 10),
-  //                         TextField(
-  //                           controller: phoneController,
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Phone',
-  //                             border: OutlineInputBorder(),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   SizedBox(width: 20),
-  //                   Expanded(
-  //                     child: Column(
-  //                       crossAxisAlignment: CrossAxisAlignment.start,
-  //                       children: [
-  //                         TextField(
-  //                           controller: lastNameController,
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Last Name',
-  //                             border: OutlineInputBorder(),
-  //                           ),
-  //                         ),
-  //                         SizedBox(height: 10),
-  //                         DropdownButtonFormField<String>(
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Room Type',
-  //                             border: OutlineInputBorder(),
-  //                           ),
-  //                           value: roomType,
-  //                           items: ['Single Bed', 'Double Bed']
-  //                               .map((item) => DropdownMenuItem(
-  //                             value: item,
-  //                             child: Text(item),
-  //                           ))
-  //                               .toList(),
-  //                           onChanged: (value) {
-  //                             roomType = value;
-  //                           },
-  //                         ),
-  //                         SizedBox(height: 10),
-  //                         TextField(
-  //                           readOnly: true,
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Check-in Date',
-  //                             border: OutlineInputBorder(),
-  //                             suffixIcon: Icon(Icons.calendar_today),
-  //                           ),
-  //                           onTap: () async {
-  //                             checkInDate = await showDatePicker(
-  //                               context: context,
-  //                               initialDate: DateTime.now(),
-  //                               firstDate: DateTime.now(),
-  //                               lastDate: DateTime(2100),
-  //                             );
-  //                           },
-  //                         ),
-  //                         SizedBox(height: 10),
-  //                         TextField(
-  //                           readOnly: true,
-  //                           decoration: InputDecoration(
-  //                             labelText: 'Check-out Date',
-  //                             border: OutlineInputBorder(),
-  //                             suffixIcon: Icon(Icons.calendar_today),
-  //                           ),
-  //                           onTap: () async {
-  //                             checkOutDate = await showDatePicker(
-  //                               context: context,
-  //                               initialDate: checkInDate ?? DateTime.now(),
-  //                               firstDate: checkInDate ?? DateTime.now(),
-  //                               lastDate: DateTime(2100),
-  //                             );
-  //                           },
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //               SizedBox(height: 20),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 children: [
-  //                   ElevatedButton(
-  //                     onPressed: () {
-  //                       Navigator.of(context).pop();
-  //                     },
-  //                     style: ElevatedButton.styleFrom(
-  //                       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-  //                     ),
-  //                     child: Text('Cancel'),
-  //                   ),
-  //                   SizedBox(width: 20),
-  //                   ElevatedButton(
-  //                     onPressed: () {
-  //                       ScaffoldMessenger.of(context).showSnackBar(
-  //                         SnackBar(content: Text('Booking confirmed!')),
-  //                       );
-  //                       Navigator.of(context).pop();
-  //                     },
-  //                     style: ElevatedButton.styleFrom(
-  //                       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-  //                     ),
-  //                     child: Text('Confirm'),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-  //
+class HotelHomePage extends StatefulWidget {
+  @override
+  _HotelHomePageState createState() => _HotelHomePageState();
+}
+
+class _HotelHomePageState extends State<HotelHomePage> {
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _roomsSectionKey = GlobalKey();
+  final GlobalKey _contactSectionKey = GlobalKey();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _feedbackController = TextEditingController();
+
+  void _scrollToRooms() {
+    Scrollable.ensureVisible(
+      _roomsSectionKey.currentContext!,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _scrollToContactUs() {
+    Scrollable.ensureVisible(
+      _contactSectionKey.currentContext!,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
+  }
 
   void _showLoginPopup(BuildContext context) {
     final usernameController = TextEditingController();
@@ -748,7 +41,10 @@ class HotelWebPage extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          title: Text('Welcome Admin'),
+          title: Text('Welcome Admin',style: TextStyle(
+            fontWeight: FontWeight.bold, // Makes the text bold
+            color: Colors.blue[900]!,         // Sets the text color to black
+          ),),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -771,19 +67,41 @@ class HotelWebPage extends StatelessWidget {
             ],
           ),
           actions: [
-            TextButton(
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.of(context).pop();
+            //   },
+            //   child: Text('Cancel'),
+            // ),
+
+            ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                side: BorderSide(
+                  color: Colors.red, // Red border for Cancel
+                  width: 2.0, // Border width
+                ),
+              ),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold, // Bold text
+                  color: Colors.red, // Red font for Cancel
+                ),
+              ),
             ),
+
             ElevatedButton(
               onPressed: () async {
                 final username = usernameController.text;
                 final password = passwordController.text;
 
                 // API URL for login validation
-                final url = Uri.parse('http://localhost:3000/login'); // Adjust if your backend is running on a different host
+                final url = Uri.parse(
+                    'http://localhost:3000/login'); // Adjust if your backend is running on a different host
 
                 // Send the POST request to validate login credentials
                 final response = await http.post(
@@ -806,15 +124,23 @@ class HotelWebPage extends StatelessWidget {
                   );
                 }
               },
-              child: Text('Submit'),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                side: BorderSide(
+                  color: Colors.blue[900]!, // Dark blue border for Confirm
+                  width: 2.0, // Border width
+                ),
+              ),
+              child: Text('Submit',style: TextStyle(
+                fontWeight: FontWeight.bold, // Bold text
+                color: Colors.blue[900]!, // Blue font for Confirm
+              ),),
             ),
           ],
         );
       },
     );
   }
-
-
 
   void _showBookingPopup(BuildContext context) {
     final firstNameController = TextEditingController();
@@ -832,114 +158,15 @@ class HotelWebPage extends StatelessWidget {
     String? roomType2;
     String? roomType3;
 
-   // double totalBill1 = 10.0;
+    // double totalBill1 = 10.0;
     //double totalBill2 = 10.0;
     //double totalBill3 = 10.0;
 
-
-
-    String?paymentMethod;
-
-    // Add the _submitForm function inside to access the variables
-    // void _submitForm() async {
-    //   final customerUrl = Uri.parse('http://localhost:3000/addCustomer');
-    //   final reservationUrl = Uri.parse('http://localhost:3000/addReservation');
-    //
-    //   final customerResponse = await http.post(
-    //     customerUrl,
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: json.encode({
-    //       'first_name': firstNameController.text,
-    //       'last_name': lastNameController.text,
-    //       'gender': gender,
-    //       'email': emailController.text,
-    //       'phone': phoneController.text,
-    //       'rating': 0,
-    //     }),
-    //   );
-    //
-    //   if (customerResponse.statusCode == 201) {
-    //     final customerData = json.decode(customerResponse.body);
-    //     final cusId = customerData['cus_id'];
-    //
-    //     // Pass cusId to reservation API
-    //     final reservationResponse = await http.post(
-    //       reservationUrl,
-    //       headers: {'Content-Type': 'application/json'},
-    //       body: json.encode({
-    //         'cus_id': cusId,
-    //         'room_type': roomType,
-    //         'check_in_date': checkInDateController.text,
-    //         'check_out_date': checkOutDateController.text,
-    //         'total_bill': totalBill,
-    //       }),
-    //     );
-    //
-    //     if (reservationResponse.statusCode == 201) {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         SnackBar(content: Text('Reservation created successfully!')),
-    //       );
-    //     } else {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         SnackBar(content: Text('Failed to create reservation.')),
-    //       );
-    //     }
-    //   } else {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(content: Text('Failed to add customer.')),
-    //     );
-    //   }
-    //
-    // }
-
-    // void _submitForm() async {
-    //   final combinedUrl = Uri.parse('http://localhost:3000/addCustomerAndReservation');
-    //
-    //   // Prepare the request payload
-    //   final requestBody = {
-    //     'first_name': firstNameController.text,
-    //     'last_name': lastNameController.text,
-    //     'gender': gender,
-    //     'email': emailController.text,
-    //     'phone': phoneController.text,
-    //     'rating': 0,
-    //     'room_type': roomType1,
-    //     'check_in_date': checkInDateController1.text,
-    //     'check_out_date': checkOutDateController1.text,
-    //     'total_bill': totalBill,
-    //   };
-    //
-    //   try {
-    //     // Send the request to the combined API
-    //     final response = await http.post(
-    //       combinedUrl,
-    //       headers: {'Content-Type': 'application/json'},
-    //       body: json.encode(requestBody),
-    //     );
-    //
-    //     if (response.statusCode == 201) {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         SnackBar(content: Text('Reservation created successfully!')),
-    //       );
-    //     } else if (response.statusCode == 200) {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         SnackBar(content: Text('Customer already exists. Reservation created successfully!')),
-    //       );
-    //     } else {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         SnackBar(content: Text('Failed to create reservation.')),
-    //       );
-    //     }
-    //   } catch (e) {
-    //     print('Error: $e');
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(content: Text('An error occurred while creating the reservation.')),
-    //     );
-    //   }
-    // }
+    String? paymentMethod;
 
     void _showPaymentPopup(double totalBill) {
-      final TextEditingController paidAmountController = TextEditingController();
+      final TextEditingController paidAmountController =
+          TextEditingController();
 
       showDialog(
         context: context,
@@ -957,7 +184,11 @@ class HotelWebPage extends StatelessWidget {
                 children: [
                   Text(
                     'Payment Confirmation',
-                    style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,// Makes the text bold
+                      color: Colors.blue[900]!,         // Sets the text color to black
+                    ),
                   ),
                   SizedBox(height: 20),
                   Text(
@@ -980,30 +211,56 @@ class HotelWebPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     Navigator.of(context).pop();
+                      //   },
+                      //   style: ElevatedButton.styleFrom(
+                      //     padding: EdgeInsets.symmetric(
+                      //         horizontal: 30, vertical: 15),
+                      //   ),
+                      //   child: Text('Cancel'),
+                      // ),
+
                       ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          side: BorderSide(
+                            color: Colors.red, // Red border for Cancel
+                            width: 2.0, // Border width
+                          ),
                         ),
-                        child: Text('Cancel'),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold, // Bold text
+                            color: Colors.red, // Red font for Cancel
+                          ),
+                        ),
                       ),
+                      SizedBox(width: 20),
+
                       ElevatedButton(
                         onPressed: () async {
-                          double paidAmount = double.tryParse(paidAmountController.text) ?? 0;
+                          double paidAmount =
+                              double.tryParse(paidAmountController.text) ?? 0;
 
                           if (paidAmount < totalBill * 0.5) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('Paid amount must be at least 50% of the total bill!'),
+                                content: Text(
+                                    'Paid amount must be at least 50% of the total bill!'),
                               ),
                             );
                           } else {
                             try {
-                              final paymentUrl = Uri.parse('http://localhost:3000/addPayment');
+                              final paymentUrl =
+                                  Uri.parse('http://localhost:3000/addPayment');
                               final paymentRequestBody = {
                                 'total_amount': totalBill,
                                 'paid': paidAmount,
@@ -1017,30 +274,41 @@ class HotelWebPage extends StatelessWidget {
 
                               if (response.statusCode == 201) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Payment successful!')),
+                                  SnackBar(
+                                      content: Text('Payment successful!')),
                                 );
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                               } else {
                                 final responseData = json.decode(response.body);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(responseData['message'] ?? 'Failed to process payment.')),
+                                  SnackBar(
+                                      content: Text(responseData['message'] ??
+                                          'Failed to process payment.')),
                                 );
                               }
                             } catch (e) {
                               print('Error: $e');
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('An error occurred while processing the payment.')),
+                                SnackBar(
+                                    content: Text(
+                                        'An error occurred while processing the payment.')),
                               );
                             }
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          side: BorderSide(
+                            color: Colors.blue[900]!, // Dark blue border for Confirm
+                            width: 2.0, // Border width
+                          ),
                         ),
-                        child: Text('Submit'),
+                        child: Text('Submit', style: TextStyle(
+                          fontWeight: FontWeight.bold, // Bold text
+                          color: Colors.blue[900]!, // Blue font for Confirm
+                        ),),
                       ),
-
                     ],
                   ),
                 ],
@@ -1052,7 +320,8 @@ class HotelWebPage extends StatelessWidget {
     }
 
     void _submitForm() async {
-      final combinedUrl = Uri.parse('http://localhost:3000/addCustomerAndReservation');
+      final combinedUrl =
+          Uri.parse('http://localhost:3000/addCustomerAndReservation');
 
       final reservations = [];
 
@@ -1064,7 +333,7 @@ class HotelWebPage extends StatelessWidget {
           'room_type': roomType1,
           'check_in_date': checkInDateController1.text,
           'check_out_date': checkOutDateController1.text,
-        //  'total_bill': totalBill1,
+          //  'total_bill': totalBill1,
         });
       }
 
@@ -1076,7 +345,7 @@ class HotelWebPage extends StatelessWidget {
           'room_type': roomType2,
           'check_in_date': checkInDateController2.text,
           'check_out_date': checkOutDateController2.text,
-         // 'total_bill': totalBill2,
+          // 'total_bill': totalBill2,
         });
       }
 
@@ -1088,14 +357,15 @@ class HotelWebPage extends StatelessWidget {
           'room_type': roomType3,
           'check_in_date': checkInDateController3.text,
           'check_out_date': checkOutDateController3.text,
-         // 'total_bill': totalBill3,
+          // 'total_bill': totalBill3,
         });
       }
       print(reservations);
 
       if (reservations.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please provide at least one valid reservation.')),
+          SnackBar(
+              content: Text('Please provide at least one valid reservation.')),
         );
         return;
       }
@@ -1116,40 +386,41 @@ class HotelWebPage extends StatelessWidget {
           combinedUrl,
           headers: {'Content-Type': 'application/json'},
           body: json.encode(requestBody),
-
         );
 
         if (response.statusCode == 201) {
-        //  ScaffoldMessenger.of(context).showSnackBar(
-        //    SnackBar(content: Text('Reservations created successfully!')),
-         // );
+          //  ScaffoldMessenger.of(context).showSnackBar(
+          //    SnackBar(content: Text('Reservations created successfully!')),
+          // );
           // Calculate the total bill and show the payment popup
-         // if (response.statusCode == 201) {
-            final responseData = json.decode(response.body);
-            final totalBill = responseData['pay'];
+          // if (response.statusCode == 201) {
+          final responseData = json.decode(response.body);
+          final totalBill = responseData['pay'];
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Reservations created successfully!')),
-            );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Reservations created successfully!')),
+          );
 
-            // Show payment popup
-            _showPaymentPopup(totalBill);
-         // }
-
+          // Show payment popup
+          _showPaymentPopup(totalBill);
+          // }
         } else {
           final responseData = json.decode(response.body);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(responseData['message'] ?? 'Failed to create reservations.')),
+            SnackBar(
+                content: Text(responseData['message'] ??
+                    'Failed to create reservations.')),
           );
         }
       } catch (e) {
         print('Error: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An error occurred while creating the reservations.')),
+          SnackBar(
+              content:
+                  Text('An error occurred while creating the reservations.')),
         );
       }
     }
-
 
     showDialog(
       context: context,
@@ -1166,7 +437,11 @@ class HotelWebPage extends StatelessWidget {
               children: [
                 Text(
                   'Welcome to our hotel',
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Makes the text bold
+                    color: Colors.blue[900]!,         // Sets the text color to black
+                    fontSize: 24,
+                  ),
                 ),
                 SizedBox(height: 20),
                 Row(
@@ -1191,7 +466,9 @@ class HotelWebPage extends StatelessWidget {
                               border: OutlineInputBorder(),
                             ),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextField(
                             controller: emailController,
                             decoration: InputDecoration(
@@ -1208,9 +485,9 @@ class HotelWebPage extends StatelessWidget {
                             value: gender,
                             items: ['Male', 'Female']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               gender = value;
@@ -1248,9 +525,9 @@ class HotelWebPage extends StatelessWidget {
                             value: roomType1,
                             items: ['Single Bed', 'Double Bed']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               roomType1 = value;
@@ -1273,8 +550,10 @@ class HotelWebPage extends StatelessWidget {
                                 lastDate: DateTime(2100),
                               );
                               if (selectedDate != null) {
-                                checkInDateController1.text =
-                                    selectedDate.toIso8601String().split('T').first;
+                                checkInDateController1.text = selectedDate
+                                    .toIso8601String()
+                                    .split('T')
+                                    .first;
                               }
                             },
                           ),
@@ -1295,12 +574,16 @@ class HotelWebPage extends StatelessWidget {
                                 lastDate: DateTime(2100),
                               );
                               if (selectedDate != null) {
-                                checkOutDateController1.text =
-                                    selectedDate.toIso8601String().split('T').first;
+                                checkOutDateController1.text = selectedDate
+                                    .toIso8601String()
+                                    .split('T')
+                                    .first;
                               }
                             },
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText: 'Payment Method',
@@ -1309,9 +592,9 @@ class HotelWebPage extends StatelessWidget {
                             value: paymentMethod,
                             items: ['Cash', 'Banking/Others']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               paymentMethod = value;
@@ -1341,9 +624,9 @@ class HotelWebPage extends StatelessWidget {
                             value: roomType2,
                             items: ['Single Bed', 'Double Bed']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               roomType2 = value;
@@ -1366,8 +649,10 @@ class HotelWebPage extends StatelessWidget {
                                 lastDate: DateTime(2100),
                               );
                               if (selectedDate != null) {
-                                checkInDateController2.text =
-                                    selectedDate.toIso8601String().split('T').first;
+                                checkInDateController2.text = selectedDate
+                                    .toIso8601String()
+                                    .split('T')
+                                    .first;
                               }
                             },
                           ),
@@ -1388,12 +673,16 @@ class HotelWebPage extends StatelessWidget {
                                 lastDate: DateTime(2100),
                               );
                               if (selectedDate != null) {
-                                checkOutDateController2.text =
-                                    selectedDate.toIso8601String().split('T').first;
+                                checkOutDateController2.text = selectedDate
+                                    .toIso8601String()
+                                    .split('T')
+                                    .first;
                               }
                             },
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText: 'Payment Method',
@@ -1402,9 +691,9 @@ class HotelWebPage extends StatelessWidget {
                             value: paymentMethod,
                             items: ['Cash', 'Banking/Others']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               paymentMethod = value;
@@ -1434,9 +723,9 @@ class HotelWebPage extends StatelessWidget {
                             value: roomType3,
                             items: ['Single Bed', 'Double Bed']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               roomType3 = value;
@@ -1459,8 +748,10 @@ class HotelWebPage extends StatelessWidget {
                                 lastDate: DateTime(2100),
                               );
                               if (selectedDate != null) {
-                                checkInDateController3.text =
-                                    selectedDate.toIso8601String().split('T').first;
+                                checkInDateController3.text = selectedDate
+                                    .toIso8601String()
+                                    .split('T')
+                                    .first;
                               }
                             },
                           ),
@@ -1481,12 +772,16 @@ class HotelWebPage extends StatelessWidget {
                                 lastDate: DateTime(2100),
                               );
                               if (selectedDate != null) {
-                                checkOutDateController3.text =
-                                    selectedDate.toIso8601String().split('T').first;
+                                checkOutDateController3.text = selectedDate
+                                    .toIso8601String()
+                                    .split('T')
+                                    .first;
                               }
                             },
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText: 'Payment Method',
@@ -1495,9 +790,9 @@ class HotelWebPage extends StatelessWidget {
                             value: paymentMethod,
                             items: ['Cash', 'Banking/Others']
                                 .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(item),
-                            ))
+                                      value: item,
+                                      child: Text(item),
+                                    ))
                                 .toList(),
                             onChanged: (value) {
                               paymentMethod = value;
@@ -1506,32 +801,71 @@ class HotelWebPage extends StatelessWidget {
                         ],
                       ),
                     ),
-
-
-
                   ],
                 ),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     Navigator.of(context).pop();
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     padding:
+                    //         EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    //   ),
+                    //   child: Text('Cancel'),
+                    // ),
+                    // SizedBox(width: 20),
+                    // ElevatedButton(
+                    //   onPressed: _submitForm,
+                    //   style: ElevatedButton.styleFrom(
+                    //     padding:
+                    //         EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    //   ),
+                    //   child: Text('Confirm'),
+                    // ),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        side: BorderSide(
+                          color: Colors.red, // Red border for Cancel
+                          width: 2.0, // Border width
+                        ),
                       ),
-                      child: Text('Cancel'),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold, // Bold text
+                          color: Colors.red, // Red font for Cancel
+                        ),
+                      ),
                     ),
+
                     SizedBox(width: 20),
+
                     ElevatedButton(
                       onPressed: _submitForm,
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        side: BorderSide(
+                          color: Colors.blue[900]!, // Dark blue border for Confirm
+                          width: 2.0, // Border width
+                        ),
                       ),
-                      child: Text('Confirm'),
+                      child: Text(
+                        'Confirm',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold, // Bold text
+                          color: Colors.blue[900]!, // Blue font for Confirm
+                        ),
+                      ),
                     ),
+
                   ],
                 ),
               ],
@@ -1542,160 +876,353 @@ class HotelWebPage extends StatelessWidget {
     );
   }
 
+  void _sendFeedback() {
+    // Here, you can handle feedback submission
+    String email = _emailController.text;
+    String feedback = _feedbackController.text;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Background Image
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/h1.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Column(
-            children: [
-              // Navigation Bar
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                color: Colors.white.withOpacity(0.9),
-                height: 80.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'HB Website',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        TextButton(onPressed: () {}, child: Text('Home')),
-                        TextButton(onPressed: () {}, child: Text('Rooms')),
-                        TextButton(onPressed: () {}, child: Text('Facilities')),
-                        TextButton(onPressed: () {}, child: Text('Contact Us')),
-                        TextButton(onPressed: () {}, child: Text('About')),
-                        SizedBox(width: 20),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     _showBookingPopup(context);
-                        //   },
-                        //   child: Text('Book Now'),
-                        // ),
-                        ElevatedButton(
-                          onPressed: () {
-                            _showBookingPopup(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: Text('Book Now'),
-                        ),
-                        SizedBox(width: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            _showLoginPopup(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: Text('Login'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Spacer(),
-              // Booking Availability Section
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
-                padding: EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(15.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10.0,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      'Check Booking Availability',
-                      style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 20.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Check-in',
-                              border: OutlineInputBorder(),
-                              suffixIcon: Icon(Icons.calendar_today),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Check-out',
-                              border: OutlineInputBorder(),
-                              suffixIcon: Icon(Icons.calendar_today),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Adult',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Children',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20.0),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Submit'),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+    // Handle the feedback, for example, by sending it to a backend or displaying a success message
+    print("Email: $email");
+    print("Feedback: $feedback");
+
+    // Clear the fields after submission
+    _emailController.clear();
+    _feedbackController.clear();
+
+    // Optionally, show a confirmation dialog or message
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Feedback Sent'),
+        content: Text('Thank you for your feedback!'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('OK'),
           ),
         ],
       ),
     );
   }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Stack(children: [
+      // Background Image
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/h1.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      Column(
+        children: [
+          // Navigation Bar
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            color: Colors.white.withOpacity(0.9),
+            height: 80.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Royal Haven Hotel',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                   // Makes the text bold
+                      color: Colors.blue[900]!,         // Sets the text color to black
+
+                  ),
+                ),
+                Row(
+                  children: [
+                    TextButton(onPressed: () {}, child: Text('Home',style: TextStyle(
+                     // fontWeight: FontWeight.bold, // Makes the text bold
+                      color: Colors.blue[900]!,         // Sets the text color to black
+                    ),)),
+                    TextButton(onPressed: _scrollToRooms, child: Text('Rooms',style: TextStyle(
+                     // fontWeight: FontWeight.bold, // Makes the text bold
+                      color: Colors.blue[900]!,         // Sets the text color to black
+                    ),)),
+                    //   TextButton(onPressed: () {}, child: Text('Facilities')),
+                    TextButton(onPressed: () {}, child: Text('Contact Us',style: TextStyle(
+                    //  fontWeight: FontWeight.bold, // Makes the text bold
+                      color: Colors.blue[900]!,         // Sets the text color to black
+                    ),)),
+                    // TextButton(onPressed: () {}, child: Text('About')),
+                    SizedBox(width: 20),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     _showBookingPopup(context);
+                    //   },
+                    //   child: Text('Book Now'),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     _showBookingPopup(context);
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.zero,
+                    //     ),
+                    //   ),
+                    //   child: Text('Book Now'),
+                    // ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _showBookingPopup(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        side: BorderSide(
+                          color: Colors.blue[900]!,  // Dark blue color
+                          width: 2.0,  // Border width
+                        ),
+                      ),
+                      child: Text('Book Now',style: TextStyle(
+                        fontWeight: FontWeight.bold, // Makes the text bold
+                        color: Colors.blue[900]!,         // Sets the text color to black
+                      ),),
+                    ),
+
+                    SizedBox(width: 10),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     _showLoginPopup(context);
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.zero,
+                    //     ),
+                    //   ),
+                    //   child: Text('Login'),
+                    // ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _showLoginPopup(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        side: BorderSide(
+                          color: Colors.blue[900]!,  // Dark blue color
+                          width: 2.0,  // Border width
+                        ),
+                      ),
+                      child: Text('Login',style: TextStyle(
+                        fontWeight: FontWeight.bold, // Makes the text bold
+                        color: Colors.blue[900]!,         // Sets the text color to black
+                      ),),
+                    )
+
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 50),
+
+          // Rooms Section
+          Expanded(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  // Background Image
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/h1.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  // Rooms Section
+                  Container(
+                    key: _roomsSectionKey, // Assigning key to Rooms section
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Rooms',
+                          style: TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 3 / 2,
+                          ),
+                          itemCount: rooms.length,
+                          itemBuilder: (context, index) {
+                            return RoomCard(room: rooms[index]);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Contact Us Section
+                  Container(
+                    key: _contactSectionKey, // Assigning key to Contact section
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Contact Us',
+                          style: TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        // Social Media and Feedback
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.facebook,
+                                  size: 40, color: Colors.blue),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.email,
+                                  size: 40, color: Colors.red),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Implement send feedback functionality here
+                            //_showFeedbackPopup(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
+                          ),
+                          child: Text('Send Feedback'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ]));
+  }
+
+}
+
+// Room Model
+class Room {
+  final String name;
+  final String image;
+  final String price;
+  final String details;
+
+  Room(
+      {required this.name,
+      required this.image,
+      required this.price,
+      required this.details});
+}
+
+// Sample Room Data
+List<Room> rooms = [
+  Room(
+      name: "Single Bed Room",
+      image: "assets/room1.jpg",
+      price: "\$50/night",
+      details: "Cozy room with single bed, WiFi, and AC."),
+  Room(
+      name: "Single Bed Room",
+      image: "assets/room2.jpg",
+      price: "\$50/night",
+      details: "Cozy room with single bed, WiFi, and AC."),
+  Room(
+      name: "Single Bed Room",
+      image: "assets/room3.jpg",
+      price: "\$50/night",
+      details: "Cozy room with single bed, WiFi, and AC."),
+  Room(
+      name: "Double Bed Room",
+      image: "assets/double_room.jpg",
+      price: "\$80/night",
+      details: "Spacious double bed room with a great view."),
+];
+
+// Room Card Widget
+class RoomCard extends StatelessWidget {
+  final Room room;
+
+  const RoomCard({Key? key, required this.room}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+              child: Image.asset(room.image,
+                  fit: BoxFit.cover, width: double.infinity),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(room.name,
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text(room.details,
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+                SizedBox(height: 5),
+                Text(room.price,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Dummy Popups (To be implemented)
+void _showBookingPopup(BuildContext context) {
+  // Show Booking Popup
+}
+
+void _showLoginPopup(BuildContext context) {
+  // Show Login Popup
 }

@@ -281,12 +281,15 @@ class _RoomPageState extends State<RoomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Room Management"),
+        title: Text("Room Management",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+
+        centerTitle: true, // Center the title
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Radio buttons for selecting actions
             SingleChildScrollView(
@@ -304,6 +307,8 @@ class _RoomPageState extends State<RoomPage> {
                     },
                   ),
                   Text("View"),
+                  SizedBox(width: 16),
+
                   Radio<String>(
                     value: "Add",
                     groupValue: selectedAction,
@@ -315,6 +320,7 @@ class _RoomPageState extends State<RoomPage> {
                     },
                   ),
                   Text("Add"),
+                  SizedBox(width: 16),
                   Radio<String>(
                     value: "Delete",
                     groupValue: selectedAction,
@@ -326,6 +332,7 @@ class _RoomPageState extends State<RoomPage> {
                     },
                   ),
                   Text("Delete"),
+                  SizedBox(width: 16),
                   Radio<String>(
                     value: "Update",
                     groupValue: selectedAction,
@@ -337,6 +344,7 @@ class _RoomPageState extends State<RoomPage> {
                     },
                   ),
                   Text("Update"),
+                  SizedBox(width: 16),
                   Radio<String>(
                     value: "Sort",
                     groupValue: selectedAction,
@@ -348,6 +356,7 @@ class _RoomPageState extends State<RoomPage> {
                     },
                   ),
                   Text("Sort"),
+                  SizedBox(width: 16),
                   Radio<String>(
                     value: "Search",
                     groupValue: selectedAction,
@@ -359,6 +368,7 @@ class _RoomPageState extends State<RoomPage> {
                     },
                   ),
                   Text("Search"),
+                  SizedBox(width: 16),
                 ],
               ),
             ),
@@ -470,6 +480,8 @@ class _RoomPageState extends State<RoomPage> {
                 child: Text("Submit"),
               ),
             ],
+
+
 
             if (selectedAction == "Update") ...[
               SizedBox(height: 16),
@@ -636,7 +648,7 @@ class _RoomPageState extends State<RoomPage> {
               //     ),
               //   ),
               // ),
-              Expanded(
+              Expanded(child:  Center(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical, // Vertical scrolling
                   child: SingleChildScrollView(
@@ -675,10 +687,13 @@ class _RoomPageState extends State<RoomPage> {
                   ),
                 ),
               ),
+              )
+
             ],
           ],
         ),
       ),
     );
   }
+
 }

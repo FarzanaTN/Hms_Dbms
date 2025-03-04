@@ -247,7 +247,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Department Management"),
+        title: Text("Department Management",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
         centerTitle: true,
       ),
       body: Padding(
@@ -270,6 +270,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                   },
                 ),
                 Text("View"),
+                SizedBox(width: 16),
+
                 Radio<String>(
                   value: "Add",
                   groupValue: selectedAction,
@@ -281,6 +283,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                   },
                 ),
                 Text("Add"),
+                SizedBox(width: 16),
+
                 Radio<String>(
                   value: "Delete",
                   groupValue: selectedAction,
@@ -292,6 +296,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                   },
                 ),
                 Text("Delete"),
+                SizedBox(width: 16),
+
                 Radio<String>(
                   value: "Update",
                   groupValue: selectedAction,
@@ -303,6 +309,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                   },
                 ),
                 Text("Update"),
+                SizedBox(width: 16),
+
                 Radio<String>(
                   value: "Sort",
                   groupValue: selectedAction,
@@ -314,6 +322,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                   },
                 ),
                 Text("Sort"),
+                SizedBox(width: 16),
+
                 Radio<String>(
                   value: "Search",
                   groupValue: selectedAction,
@@ -325,6 +335,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                   },
                 ),
                 Text("Search"),
+                SizedBox(width: 16),
+
               ],
             ),
 
@@ -405,11 +417,11 @@ class _DepartmentPageState extends State<DepartmentPage> {
             // Table-like structure for department information
             if (selectedAction == "View") ...[
               SizedBox(height: 20),
-              Text(
-                "Department List",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              SizedBox(height: 10),
+              // Text(
+              //   "Department List",
+              //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              // ),
+              // SizedBox(height: 10),
               DataTable(
                 columns: [
                   DataColumn(label: Text("Department Name")),

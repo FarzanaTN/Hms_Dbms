@@ -266,17 +266,21 @@ class _EmployeePageState extends State<EmployeePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Employee Management"),
+        title: Text("Employee Management",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+
+        centerTitle: true, // Center the title
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Radio buttons for selecting actions
-            Row(
-              children: [
-                Radio<String>(
+            SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                     children: [
+                     Radio<String>(
                   value: "View",
                   groupValue: selectedAction,
                   onChanged: (value) {
@@ -287,6 +291,7 @@ class _EmployeePageState extends State<EmployeePage> {
                   },
                 ),
                 Text("View"),
+                SizedBox(width: 16),
                 Radio<String>(
                   value: "Add",
                   groupValue: selectedAction,
@@ -298,6 +303,7 @@ class _EmployeePageState extends State<EmployeePage> {
                   },
                 ),
                 Text("Add"),
+                SizedBox(width: 16),
                 Radio<String>(
                   value: "Delete",
                   groupValue: selectedAction,
@@ -309,6 +315,7 @@ class _EmployeePageState extends State<EmployeePage> {
                   },
                 ),
                 Text("Delete"),
+                SizedBox(width: 16),
                 Radio<String>(
                   value: "Update",
                   groupValue: selectedAction,
@@ -320,14 +327,15 @@ class _EmployeePageState extends State<EmployeePage> {
                   },
                 ),
                 Text("Update"),
+                SizedBox(width: 16),
 
               ],
             ),
-
+            ),
 
 
             if (selectedAction == "Delete") ...[
-              SizedBox(height: 16),
+              SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
                   labelText: "Employee ID",
@@ -348,6 +356,8 @@ class _EmployeePageState extends State<EmployeePage> {
             ],
 
             if (selectedAction == "Update") ...[
+              SizedBox(height: 20),
+
               TextField(
                 decoration: InputDecoration(
                   labelText: "Minimum Service Length (Years)",
@@ -838,7 +848,7 @@ class _EmployeePageState extends State<EmployeePage> {
 
 
             if (selectedAction == "View") ...[
-              SizedBox(height: 16),
+              SizedBox(height: 20),
               // Expanded(
               //   child: SingleChildScrollView(
               //     scrollDirection: Axis.horizontal, // For horizontal scrolling
@@ -874,40 +884,43 @@ class _EmployeePageState extends State<EmployeePage> {
               //     ),
               //   ),
               // ),
+
               Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical, // Enable vertical scrolling
+                child: Center(
                   child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal, // Enable horizontal scrolling
-                    child: DataTable(
-                      columns: const [
-                        DataColumn(label: Text("ID")),
-                        DataColumn(label: Text("First Name")),
-                        DataColumn(label: Text("Last Name")),
-                        DataColumn(label: Text("Gender")),
-                        DataColumn(label: Text("Date of Birth")),
-                        DataColumn(label: Text("Date of Join")),
-                        DataColumn(label: Text("Phone")),
-                        DataColumn(label: Text("Email")),
-                        DataColumn(label: Text("Department")),
-                        DataColumn(label: Text("Salary")),
-                      ],
-                      rows: employees.map((employee) {
-                        return DataRow(
-                          cells: [
-                            DataCell(Text(employee['emp_id']?.toString() ?? "")),
-                            DataCell(Text(employee['first_name'] ?? "")),
-                            DataCell(Text(employee['last_name'] ?? "")),
-                            DataCell(Text(employee['gender'] ?? "")),
-                            DataCell(Text(employee['date_of_birth'] ?? "")),
-                            DataCell(Text(employee['date_of_join'] ?? "")),
-                            DataCell(Text(employee['phone'] ?? "")),
-                            DataCell(Text(employee['email'] ?? "")),
-                            DataCell(Text(employee['dept_name'] ?? "")),
-                            DataCell(Text(employee['salary']?.toString() ?? "")),
-                          ],
-                        );
-                      }).toList(),
+                    scrollDirection: Axis.vertical, // Enable vertical scrolling
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+                      child: DataTable(
+                        columns: const [
+                          DataColumn(label: Text("ID")),
+                          DataColumn(label: Text("First Name")),
+                          DataColumn(label: Text("Last Name")),
+                          DataColumn(label: Text("Gender")),
+                          DataColumn(label: Text("Date of Birth")),
+                          DataColumn(label: Text("Date of Join")),
+                          DataColumn(label: Text("Phone")),
+                          DataColumn(label: Text("Email")),
+                          DataColumn(label: Text("Department")),
+                          DataColumn(label: Text("Salary")),
+                        ],
+                        rows: employees.map((employee) {
+                          return DataRow(
+                            cells: [
+                              DataCell(Text(employee['emp_id']?.toString() ?? "")),
+                              DataCell(Text(employee['first_name'] ?? "")),
+                              DataCell(Text(employee['last_name'] ?? "")),
+                              DataCell(Text(employee['gender'] ?? "")),
+                              DataCell(Text(employee['date_of_birth'] ?? "")),
+                              DataCell(Text(employee['date_of_join'] ?? "")),
+                              DataCell(Text(employee['phone'] ?? "")),
+                              DataCell(Text(employee['email'] ?? "")),
+                              DataCell(Text(employee['dept_name'] ?? "")),
+                              DataCell(Text(employee['salary']?.toString() ?? "")),
+                            ],
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),

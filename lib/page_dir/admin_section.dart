@@ -484,9 +484,11 @@ import 'package:hotel_dbms/page_dir/DeptAvgSalary.dart';
 import 'package:hotel_dbms/page_dir/DeptSortByBudget.dart';
 import 'package:hotel_dbms/page_dir/DirtyRooms.dart';
 import 'package:hotel_dbms/page_dir/employee.dart';
+import 'package:hotel_dbms/page_dir/payment.dart';
 import 'package:hotel_dbms/page_dir/room.dart';
 import 'package:hotel_dbms/page_dir/department.dart';
 
+import 'AllCustomerPage.dart';
 import 'EmployeeCounttByDeptPage.dart';
 import 'MaximumSalaryPage.dart';
 import 'ProfitPerMonthPage.dart';
@@ -510,9 +512,11 @@ class _AdminSection extends State<AdminSection> {
     RoomPage(),
     EmployeePage(),
     DepartmentPage(),
-    Center(child: Text('Customers')), // Placeholder for Customers
+   // Center(child: Text('Customers')),//Placeholder for Customers
+    CustomerPage(),
     Center(child: Text('Reservations')), // Placeholder for Reservations
-    Center(child: Text('Payments')), // Placeholder for Payments
+   // Center(child: Text('Payments')), // Placeholder for Payments
+    PaymentPage(),
     CurrentCustomersPage(), // New "Current Customers" page
     EmployeeCountByDeptPage(), // New "Employee Count by Department" page
     ProfitPerMonthPage(), // New "Profit Per Month" page
