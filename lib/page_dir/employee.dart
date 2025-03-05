@@ -101,7 +101,6 @@ class _EmployeePageState extends State<EmployeePage> {
     }
   }
 
-
   Future<void> deleteEmployee(String id) async {
     final response = await http.delete(
       Uri.parse('http://localhost:3000/employees/$id'), // Use URL params
@@ -117,7 +116,8 @@ class _EmployeePageState extends State<EmployeePage> {
     }
   }
 
-  Future<void> updateAllEmployeesSalary(String serviceLength, String percentageIncrease) async {
+  Future<void> updateAllEmployeesSalary(
+      String serviceLength, String percentageIncrease) async {
     print("hello");
 
     // Make sure serviceLength and percentageIncrease are not empty
@@ -128,7 +128,8 @@ class _EmployeePageState extends State<EmployeePage> {
 
     try {
       final response = await http.put(
-        Uri.parse('http://localhost:3000/employees'), // Make sure this matches your backend
+        Uri.parse(
+            'http://localhost:3000/employees'), // Make sure this matches your backend
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'service_length': serviceLength,
@@ -151,11 +152,6 @@ class _EmployeePageState extends State<EmployeePage> {
       print('Error updating salaries: $e');
     }
   }
-
-
-
-
-
 
   // Function to clear form fields
   void _clearFields() {
@@ -227,16 +223,16 @@ class _EmployeePageState extends State<EmployeePage> {
       } else {
         print("Please provide a valid Employee ID for Delete");
       }
-    }
-    else if (selectedAction == "Update") {
+    } else if (selectedAction == "Update") {
       print("yeee");
-      if (empId != null && serviceLength != null && percentageIncrease != null) {
-        updateAllEmployeesSalary( serviceLength!, percentageIncrease!);
+      if (empId != null &&
+          serviceLength != null &&
+          percentageIncrease != null) {
+        updateAllEmployeesSalary(serviceLength!, percentageIncrease!);
       } else {
         print("Please provide valid inputs for Update");
       }
     }
-
   }
 
   // Reset fields when switching actions
@@ -266,7 +262,10 @@ class _EmployeePageState extends State<EmployeePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Employee Management",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+        title: Text(
+          "Employee Management",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
 
         centerTitle: true, // Center the title
       ),
@@ -277,62 +276,60 @@ class _EmployeePageState extends State<EmployeePage> {
           children: [
             // Radio buttons for selecting actions
             SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                     children: [
-                     Radio<String>(
-                  value: "View",
-                  groupValue: selectedAction,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedAction = value!;
-                      _resetFields(); // Reset fields when switching action
-                    });
-                  },
-                ),
-                Text("View"),
-                SizedBox(width: 16),
-                Radio<String>(
-                  value: "Add",
-                  groupValue: selectedAction,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedAction = value!;
-                      _resetFields(); // Reset fields when switching action
-                    });
-                  },
-                ),
-                Text("Add"),
-                SizedBox(width: 16),
-                Radio<String>(
-                  value: "Delete",
-                  groupValue: selectedAction,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedAction = value!;
-                      _resetFields(); // Reset fields when switching action
-                    });
-                  },
-                ),
-                Text("Delete"),
-                SizedBox(width: 16),
-                Radio<String>(
-                  value: "Update",
-                  groupValue: selectedAction,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedAction = value!;
-                      _resetFields(); // Reset fields when switching action
-                    });
-                  },
-                ),
-                Text("Update"),
-                SizedBox(width: 16),
-
-              ],
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Radio<String>(
+                    value: "View",
+                    groupValue: selectedAction,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAction = value!;
+                        _resetFields(); // Reset fields when switching action
+                      });
+                    },
+                  ),
+                  Text("View"),
+                  SizedBox(width: 16),
+                  Radio<String>(
+                    value: "Add",
+                    groupValue: selectedAction,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAction = value!;
+                        _resetFields(); // Reset fields when switching action
+                      });
+                    },
+                  ),
+                  Text("Add"),
+                  SizedBox(width: 16),
+                  Radio<String>(
+                    value: "Delete",
+                    groupValue: selectedAction,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAction = value!;
+                        _resetFields(); // Reset fields when switching action
+                      });
+                    },
+                  ),
+                  Text("Delete"),
+                  SizedBox(width: 16),
+                  Radio<String>(
+                    value: "Update",
+                    groupValue: selectedAction,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAction = value!;
+                        _resetFields(); // Reset fields when switching action
+                      });
+                    },
+                  ),
+                  Text("Update"),
+                  SizedBox(width: 16),
+                ],
+              ),
             ),
-            ),
-
 
             if (selectedAction == "Delete") ...[
               SizedBox(height: 20),
@@ -340,7 +337,7 @@ class _EmployeePageState extends State<EmployeePage> {
                 decoration: InputDecoration(
                   labelText: "Employee ID",
                   border: OutlineInputBorder(),
-                  filled: true,
+               //   filled: true,
                 ),
                 onChanged: (value) {
                   empId = value;
@@ -348,16 +345,28 @@ class _EmployeePageState extends State<EmployeePage> {
                 controller: TextEditingController(text: empId),
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Confirm',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
 
             if (selectedAction == "Update") ...[
               SizedBox(height: 20),
-
               TextField(
                 decoration: InputDecoration(
                   labelText: "Minimum Service Length (Years)",
@@ -379,15 +388,29 @@ class _EmployeePageState extends State<EmployeePage> {
                 },
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
                   if (serviceLength != null && percentageIncrease != null) {
-                    updateAllEmployeesSalary(serviceLength!, percentageIncrease!);
+                    updateAllEmployeesSalary(
+                        serviceLength!, percentageIncrease!);
                   }
                 },
-                child: Text("Update Salaries"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Update Salaries',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
 
             // Form for Add, Delete, or Update actions
@@ -842,10 +865,22 @@ class _EmployeePageState extends State<EmployeePage> {
               // Submit Button
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
-
 
             if (selectedAction == "View") ...[
               SizedBox(height: 20),
@@ -890,7 +925,8 @@ class _EmployeePageState extends State<EmployeePage> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical, // Enable vertical scrolling
                     child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+                      scrollDirection:
+                          Axis.horizontal, // Enable horizontal scrolling
                       child: DataTable(
                         columns: const [
                           DataColumn(label: Text("ID")),
@@ -907,7 +943,8 @@ class _EmployeePageState extends State<EmployeePage> {
                         rows: employees.map((employee) {
                           return DataRow(
                             cells: [
-                              DataCell(Text(employee['emp_id']?.toString() ?? "")),
+                              DataCell(
+                                  Text(employee['emp_id']?.toString() ?? "")),
                               DataCell(Text(employee['first_name'] ?? "")),
                               DataCell(Text(employee['last_name'] ?? "")),
                               DataCell(Text(employee['gender'] ?? "")),
@@ -916,7 +953,8 @@ class _EmployeePageState extends State<EmployeePage> {
                               DataCell(Text(employee['phone'] ?? "")),
                               DataCell(Text(employee['email'] ?? "")),
                               DataCell(Text(employee['dept_name'] ?? "")),
-                              DataCell(Text(employee['salary']?.toString() ?? "")),
+                              DataCell(
+                                  Text(employee['salary']?.toString() ?? "")),
                             ],
                           );
                         }).toList(),
@@ -926,18 +964,9 @@ class _EmployeePageState extends State<EmployeePage> {
                 ),
               ),
             ],
-
-
-
-
-
-
           ],
         ),
       ),
     );
   }
 }
-
-
-

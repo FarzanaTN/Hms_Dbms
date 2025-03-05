@@ -51,7 +51,7 @@ class _DeptsortbybudgetState extends State<Deptsortbybudget> {
           : SingleChildScrollView(
         scrollDirection: Axis.horizontal, // Enables horizontal scrolling
         child: DataTable(
-          border: TableBorder.all(), // Adds borders for clarity
+         // border: TableBorder.all(), // Adds borders for clarity
           columns: const [
             DataColumn(label: Text('Department', style: TextStyle(fontWeight: FontWeight.bold))),
             DataColumn(label: Text('Budget', style: TextStyle(fontWeight: FontWeight.bold))),

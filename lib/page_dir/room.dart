@@ -120,9 +120,8 @@ class _RoomPageState extends State<RoomPage> {
     }
   }
 
-
-  Future<void> updateRoom(String id, String status, String available,
-      String price) async {
+  Future<void> updateRoom(
+      String id, String status, String available, String price) async {
     final response = await http.put(
       Uri.parse('http://localhost:3000/rooms'),
       headers: {'Content-Type': 'application/json'},
@@ -131,7 +130,6 @@ class _RoomPageState extends State<RoomPage> {
         'status': status,
         'available': available,
         'price': price,
-
       }),
     );
 
@@ -176,14 +174,11 @@ class _RoomPageState extends State<RoomPage> {
       if (roomId != null &&
           roomStatus != null &&
           roomAvailable != null &&
-
-          roomPrice != null
-         ) {
+          roomPrice != null) {
         _showConfirmationDialog(
           "Update Room",
           "Are you sure you want to update the room?",
-          () => updateRoom(roomId!, roomStatus!, roomAvailable!,
-               roomPrice!),
+          () => updateRoom(roomId!, roomStatus!, roomAvailable!, roomPrice!),
         );
       } else {
         print("Please provide valid inputs for Update");
@@ -281,8 +276,10 @@ class _RoomPageState extends State<RoomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Room Management",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+        title: Text(
+          "Room Management",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
 
         centerTitle: true, // Center the title
       ),
@@ -308,7 +305,6 @@ class _RoomPageState extends State<RoomPage> {
                   ),
                   Text("View"),
                   SizedBox(width: 16),
-
                   Radio<String>(
                     value: "Add",
                     groupValue: selectedAction,
@@ -380,7 +376,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room ID",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 onChanged: (value) {
                   roomId = value;
@@ -393,7 +389,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Status",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 value: roomStatus,
                 items: ['clean', 'dirty'].map((status) {
@@ -413,7 +409,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Available",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 value: roomAvailable,
                 items: ['yes', 'no'].map((available) {
@@ -433,7 +429,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Type",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 value: roomType,
                 items: ['single bed', 'double bed'].map((type) {
@@ -453,7 +449,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Price",
                   border: OutlineInputBorder(),
-                  filled: true,
+               //   filled: true,
                 ),
                 onChanged: (value) {
                   roomPrice = value;
@@ -466,7 +462,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Profit",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 onChanged: (value) {
                   roomProfit = value;
@@ -474,14 +470,25 @@ class _RoomPageState extends State<RoomPage> {
                 controller: TextEditingController(text: roomProfit),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
-
-
 
             if (selectedAction == "Update") ...[
               SizedBox(height: 16),
@@ -489,7 +496,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room ID",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 onChanged: (value) {
                   roomId = value;
@@ -502,7 +509,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Status",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 value: roomStatus,
                 items: ['clean', 'dirty'].map((status) {
@@ -522,7 +529,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room Available",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 value: roomAvailable,
                 items: ['yes', 'no'].map((available) {
@@ -537,13 +544,12 @@ class _RoomPageState extends State<RoomPage> {
                   });
                 },
               ),
-
               SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
                   labelText: "Room Price",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 onChanged: (value) {
                   roomPrice = value;
@@ -551,12 +557,24 @@ class _RoomPageState extends State<RoomPage> {
                 controller: TextEditingController(text: roomPrice),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
               ),
-              SizedBox(height: 16),
-
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Confirm',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
 
             if (selectedAction == "Delete") ...[
@@ -565,7 +583,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Room ID",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 onChanged: (value) {
                   roomId = value;
@@ -573,11 +591,24 @@ class _RoomPageState extends State<RoomPage> {
                 controller: TextEditingController(text: roomId),
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 60),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Confirm',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
 
             if (selectedAction == "Search") ...[
@@ -586,7 +617,7 @@ class _RoomPageState extends State<RoomPage> {
                 decoration: InputDecoration(
                   labelText: "Search Room Type",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 value: roomType,
                 items: ['single bed', 'double bed'].map((type) {
@@ -601,11 +632,24 @@ class _RoomPageState extends State<RoomPage> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Search"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Search',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
 
             // Table-like structure for room information
@@ -648,52 +692,52 @@ class _RoomPageState extends State<RoomPage> {
               //     ),
               //   ),
               // ),
-              Expanded(child:  Center(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical, // Vertical scrolling
+              Expanded(
+                child: Center(
                   child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal, // Horizontal scrolling
-                    child: DataTable(
-                      columns: const [
-                        DataColumn(label: Text('Room ID')),
-                        DataColumn(label: Text('Type')),
-                        DataColumn(label: Text('Status')),
-                        DataColumn(label: Text('Available')),
-                        DataColumn(label: Text('Price')),
-                        DataColumn(label: Text('Profit')),
-                        DataColumn(label: Text('Actions')),
-                      ],
-                      rows: rooms.map<DataRow>((room) {
-                        return DataRow(
-                          cells: [
-                            DataCell(Text(room['room_id'].toString())),
-                            DataCell(Text(room['type'])),
-                            DataCell(Text(room['status'])),
-                            DataCell(Text(room['available'])),
-                            DataCell(Text('\$${room['price']}')),
-                            DataCell(Text('\$${room['profit_per_room']}')),
-                            DataCell(IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () => _showConfirmationDialog(
-                                "Delete Room",
-                                "Are you sure you want to delete this room?",
-                                    () => deleteRoom(room['room_id']),
-                              ),
-                            )),
-                          ],
-                        );
-                      }).toList(),
+                    scrollDirection: Axis.vertical, // Vertical scrolling
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal, // Horizontal scrolling
+                      child: DataTable(
+                        columns: const [
+                          DataColumn(label: Text('Room ID')),
+                          DataColumn(label: Text('Type')),
+                          DataColumn(label: Text('Status')),
+                          DataColumn(label: Text('Available')),
+                          DataColumn(label: Text('Price')),
+                          DataColumn(label: Text('Profit')),
+                          // DataColumn(label: Text('Actions')),
+                        ],
+                        rows: rooms.map<DataRow>((room) {
+                          return DataRow(
+                            cells: [
+                              DataCell(Text(room['room_id'].toString())),
+                              DataCell(Text(room['type'])),
+                              DataCell(Text(room['status'])),
+                              DataCell(Text(room['available'])),
+                              DataCell(Text('\$${room['price']}')),
+                              DataCell(Text('\$${room['profit_per_room']}')),
+                              // DataCell(IconButton(
+                              //   icon: Icon(Icons.delete),
+                              //   onPressed: () => _showConfirmationDialog(
+                              //     "Delete Room",
+                              //     "Are you sure you want to delete this room?",
+                              //         () => deleteRoom(room['room_id']),
+                              //   ),
+                              // )
+                              // ),
+                            ],
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),
-              ),
               )
-
             ],
           ],
         ),
       ),
     );
   }
-
 }

@@ -487,11 +487,13 @@ import 'package:hotel_dbms/page_dir/employee.dart';
 import 'package:hotel_dbms/page_dir/payment.dart';
 import 'package:hotel_dbms/page_dir/room.dart';
 import 'package:hotel_dbms/page_dir/department.dart';
+import 'package:hotel_dbms/page_dir/start_page.dart';
 
 import 'AllCustomerPage.dart';
 import 'EmployeeCounttByDeptPage.dart';
 import 'MaximumSalaryPage.dart';
 import 'ProfitPerMonthPage.dart';
+import 'ReservationPage.dart';
 import 'current_customers.dart';
 import 'ServiceLength.dart';
 import 'DriverDetails.dart';
@@ -514,8 +516,9 @@ class _AdminSection extends State<AdminSection> {
     DepartmentPage(),
    // Center(child: Text('Customers')),//Placeholder for Customers
     CustomerPage(),
-    Center(child: Text('Reservations')), // Placeholder for Reservations
+   // Center(child: Text('Reservations')), // Placeholder for Reservations
    // Center(child: Text('Payments')), // Placeholder for Payments
+    ReservationPage(),
     PaymentPage(),
     CurrentCustomersPage(), // New "Current Customers" page
     EmployeeCountByDeptPage(), // New "Employee Count by Department" page
@@ -529,6 +532,12 @@ class _AdminSection extends State<AdminSection> {
     Deptsortbybudget()
   ];
 
+  void _navigateToHotelHomePage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HotelHomePage()), // Replace with your actual homepage widget
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -543,11 +552,25 @@ class _AdminSection extends State<AdminSection> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   DrawerHeader(
-                    child: Text(
-                      'Menu',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    // child: Text(
+                    //   'Menu',
+                    //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    // ),
+                    // decoration: BoxDecoration(color: Colors.blue),
+                   child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          onPressed: _navigateToHotelHomePage,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Menu',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                      ],
                     ),
-                    decoration: BoxDecoration(color: Colors.blue),
+                    decoration: BoxDecoration(color: Colors.blue[900]),
                   ),
                   ListTile(
                     leading: Icon(Icons.dashboard),
@@ -717,4 +740,5 @@ class _AdminSection extends State<AdminSection> {
       ),
     );
   }
+
 }

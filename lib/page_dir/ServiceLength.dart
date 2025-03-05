@@ -51,7 +51,7 @@ class _ServicelengthState extends State<Servicelength> {
           : SingleChildScrollView(
         scrollDirection: Axis.horizontal, // Allows horizontal scrolling if needed
         child: DataTable(
-          border: TableBorder.all(), // Adds table borders
+         // border: TableBorder.all(), // Adds table borders
           columns: const [
             DataColumn(label: Text('Emp ID', style: TextStyle(fontWeight: FontWeight.bold))),
             DataColumn(label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),

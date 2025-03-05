@@ -51,7 +51,7 @@ class _DriverdetailsState extends State<Driverdetails> {
           : SingleChildScrollView(
         scrollDirection: Axis.horizontal, // Allows horizontal scrolling
         child: DataTable(
-          border: TableBorder.all(), // Adds borders for clarity
+         // border: TableBorder.all(), // Adds borders for clarity
           columns: const [
             DataColumn(label: Text('Emp ID', style: TextStyle(fontWeight: FontWeight.bold))),
             DataColumn(label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),

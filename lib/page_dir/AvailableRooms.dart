@@ -51,7 +51,7 @@ class _AvailableroomsState extends State<Availablerooms> {
           : SingleChildScrollView(
         scrollDirection: Axis.horizontal, // Enables horizontal scrolling
         child: DataTable(
-          border: TableBorder.all(), // Adds borders for clarity
+          //border: TableBorder.all(), // Adds borders for clarity
           columns: const [
             DataColumn(label: Text('Room ID', style: TextStyle(fontWeight: FontWeight.bold))),
             DataColumn(label: Text('Price', style: TextStyle(fontWeight: FontWeight.bold))),

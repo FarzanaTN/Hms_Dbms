@@ -61,7 +61,7 @@ class _DeptavgsalaryState extends State<Deptavgsalary> {
         child: Align( // Align widget to center horizontally
           alignment: Alignment.center,
           child: DataTable(
-            border: TableBorder.all(), // Adds borders for clarity
+           // border: TableBorder.all(), // Adds borders for clarity
             columns: const [
               DataColumn(label: Text('Department', style: TextStyle(fontWeight: FontWeight.bold))),
               DataColumn(label: Text('Avg Salary', style: TextStyle(fontWeight: FontWeight.bold))),

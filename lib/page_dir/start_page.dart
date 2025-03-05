@@ -1056,7 +1056,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
                         Text(
                           'Rooms',
                           style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
+                              fontSize: 28, fontWeight: FontWeight.bold,color: Colors.white),
                         ),
                         SizedBox(height: 20),
                         GridView.builder(
@@ -1152,22 +1152,27 @@ List<Room> rooms = [
   Room(
       name: "Single Bed Room",
       image: "assets/room1.jpg",
-      price: "\$50/night",
+      price: "\2100 BDT/night",
       details: "Cozy room with single bed, WiFi, and AC."),
   Room(
       name: "Single Bed Room",
       image: "assets/room2.jpg",
-      price: "\$50/night",
+      price: "\2100 BDT/night",
       details: "Cozy room with single bed, WiFi, and AC."),
   Room(
       name: "Single Bed Room",
       image: "assets/room3.jpg",
-      price: "\$50/night",
+      price: "\2100 BDT/night",
       details: "Cozy room with single bed, WiFi, and AC."),
   Room(
       name: "Double Bed Room",
-      image: "assets/double_room.jpg",
-      price: "\$80/night",
+      image: "assets/room4.jpg",
+      price: "\4000 BDT/night",
+      details: "Spacious double bed room with a great view."),
+  Room(
+      name: "Double Bed Room",
+      image: "assets/room5.jpg",
+      price: "\4000 BDT/night",
       details: "Spacious double bed room with a great view."),
 ];
 

@@ -51,7 +51,7 @@ class _DirtyroomsState extends State<Dirtyrooms> {
           : SingleChildScrollView(
         scrollDirection: Axis.horizontal, // Enables horizontal scrolling
         child: DataTable(
-          border: TableBorder.all(), // Adds borders for clarity
+         // border: TableBorder.all(), // Adds borders for clarity
           columns: const [
             DataColumn(label: Text('Room ID', style: TextStyle(fontWeight: FontWeight.bold))),
             DataColumn(label: Text('Type', style: TextStyle(fontWeight: FontWeight.bold))),

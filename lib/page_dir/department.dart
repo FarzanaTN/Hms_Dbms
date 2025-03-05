@@ -21,7 +21,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
 
   // Fetch all departments
   Future<void> fetchDepartments() async {
-    final response = await http.get(Uri.parse('http://localhost:3000/department'));
+    final response =
+        await http.get(Uri.parse('http://localhost:3000/department'));
     if (response.statusCode == 200) {
       setState(() {
         departments = json.decode(response.body);
@@ -33,15 +34,15 @@ class _DepartmentPageState extends State<DepartmentPage> {
 
   // Sort departments by name in ascending order
   Future<void> fetchDepartmentsSortByName() async {
-    final response = await http.get(Uri.parse('http://localhost:3000/department'));
+    final response =
+        await http.get(Uri.parse('http://localhost:3000/department'));
 
     if (response.statusCode == 200) {
       List<dynamic> sortedDepartments = json.decode(response.body);
 
       // Sort departments by budget in ascending order
-      sortedDepartments.sort((a, b) =>
-          double.parse(a['budget'].toString()).compareTo(double.parse(b['budget'].toString()))
-      );
+      sortedDepartments.sort((a, b) => double.parse(a['budget'].toString())
+          .compareTo(double.parse(b['budget'].toString())));
 
       setState(() {
         departments = sortedDepartments;
@@ -52,20 +53,21 @@ class _DepartmentPageState extends State<DepartmentPage> {
     }
   }
 
-
-
   // Search departments by name
   void searchDepartments() async {
     try {
       // Always fetch fresh data to search through entire dataset
-      final response = await http.get(Uri.parse('http://localhost:3000/department'));
+      final response =
+          await http.get(Uri.parse('http://localhost:3000/department'));
 
       if (response.statusCode == 200) {
         List<dynamic> allDepartments = json.decode(response.body);
 
         setState(() {
           departments = allDepartments.where((dept) {
-            return dept['name'].toLowerCase().contains(departmentName!.toLowerCase());
+            return dept['name']
+                .toLowerCase()
+                .contains(departmentName!.toLowerCase());
           }).toList();
         });
       } else {
@@ -110,13 +112,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
     }
   }
 
-
-
   Future<void> updateDepartment(String name, String budget) async {
     final response = await http.put(
       Uri.parse('http://localhost:3000/department'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode({'name': name, 'budget': budget}), // Ensure both are sent
+      body:
+          json.encode({'name': name, 'budget': budget}), // Ensure both are sent
     );
 
     if (response.statusCode == 200) {
@@ -128,7 +129,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
     }
   }
 
-
   // Handle action based on selected radio button
   void handleAction() {
     if (selectedAction == "Add") {
@@ -136,7 +136,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
         _showConfirmationDialog(
           "Add Department",
           "Are you sure you want to add the department?",
-              () => addDepartment(departmentName!, departmentBudget!),
+          () => addDepartment(departmentName!, departmentBudget!),
         );
       } else {
         print("Please provide valid inputs for Add");
@@ -146,7 +146,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
         _showConfirmationDialog(
           "Delete Department",
           "Are you sure you want to delete the department?",
-              () => deleteDepartment(departmentName!),
+          () => deleteDepartment(departmentName!),
         );
       } else {
         print("Please provide a valid department name for Delete");
@@ -156,18 +156,16 @@ class _DepartmentPageState extends State<DepartmentPage> {
         _showConfirmationDialog(
           "Update Department",
           "Are you sure you want to update the department?",
-              () => updateDepartment(departmentName!, departmentBudget!),
+          () => updateDepartment(departmentName!, departmentBudget!),
         );
-      }
-      else {
+      } else {
         print("Please provide valid inputs for Update");
       }
-    }
-    else if (selectedAction == "Sort") {
+    } else if (selectedAction == "Sort") {
       fetchDepartmentsSortByName();
       // Automatically switch to View to show results
       selectedAction = "View";
-    }  else if (selectedAction == "Search") {
+    } else if (selectedAction == "Search") {
       if (departmentName != null && departmentName!.isNotEmpty) {
         searchDepartments();
         selectedAction = "View";
@@ -178,7 +176,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
   }
 
   // Function to show a confirmation dialog
-  void _showConfirmationDialog(String title, String message, Function() onConfirm) {
+  void _showConfirmationDialog(
+      String title, String message, Function() onConfirm) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -247,7 +246,10 @@ class _DepartmentPageState extends State<DepartmentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Department Management",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+        title: Text(
+          "Department Management",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -271,7 +273,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ),
                 Text("View"),
                 SizedBox(width: 16),
-
                 Radio<String>(
                   value: "Add",
                   groupValue: selectedAction,
@@ -284,7 +285,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ),
                 Text("Add"),
                 SizedBox(width: 16),
-
                 Radio<String>(
                   value: "Delete",
                   groupValue: selectedAction,
@@ -297,7 +297,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ),
                 Text("Delete"),
                 SizedBox(width: 16),
-
                 Radio<String>(
                   value: "Update",
                   groupValue: selectedAction,
@@ -310,7 +309,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ),
                 Text("Update"),
                 SizedBox(width: 16),
-
                 Radio<String>(
                   value: "Sort",
                   groupValue: selectedAction,
@@ -323,7 +321,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ),
                 Text("Sort"),
                 SizedBox(width: 16),
-
                 Radio<String>(
                   value: "Search",
                   groupValue: selectedAction,
@@ -336,7 +333,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ),
                 Text("Search"),
                 SizedBox(width: 16),
-
               ],
             ),
 
@@ -347,20 +343,19 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 decoration: InputDecoration(
                   labelText: "Department Name",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 onChanged: (value) {
                   departmentName = value;
                 },
                 controller: TextEditingController(text: departmentName),
               ),
-
-                SizedBox(height: 16),
+              SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
                   labelText: "Department Budget",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 onChanged: (value) {
                   departmentBudget = value;
@@ -370,8 +365,21 @@ class _DepartmentPageState extends State<DepartmentPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
 
             if (selectedAction == "Delete") ...[
@@ -380,18 +388,31 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 decoration: InputDecoration(
                   labelText: "Department Name",
                   border: OutlineInputBorder(),
-                  filled: true,
+                  // filled: true,
                 ),
                 onChanged: (value) {
                   departmentName = value;
                 },
                 controller: TextEditingController(text: departmentName),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
             if (selectedAction == "Search") ...[
               SizedBox(height: 16),
@@ -399,20 +420,32 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 decoration: InputDecoration(
                   labelText: "Search Department Name",
                   border: OutlineInputBorder(),
-                  filled: true,
+               //   filled: true,
                 ),
                 onChanged: (value) {
                   departmentName = value;
                 },
                 controller: TextEditingController(text: departmentName),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Search"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Search',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
             ],
-
 
             // Table-like structure for department information
             if (selectedAction == "View") ...[
@@ -429,9 +462,9 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ],
                 rows: departments
                     .map<DataRow>((dept) => DataRow(cells: [
-                  DataCell(Text(dept['name'])),
-                  DataCell(Text(dept['budget'].toString())),
-                ]))
+                          DataCell(Text(dept['name'])),
+                          DataCell(Text(dept['budget'].toString())),
+                        ]))
                     .toList(),
               ),
             ],
