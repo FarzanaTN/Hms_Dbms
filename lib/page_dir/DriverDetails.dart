@@ -49,23 +49,26 @@ class _DriverdetailsState extends State<Driverdetails> {
           : _drivers.isEmpty
           ? const Center(child: Text('No driver data found'))
           : SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Allows horizontal scrolling
-        child: DataTable(
-         // border: TableBorder.all(), // Adds borders for clarity
-          columns: const [
-            DataColumn(label: Text('Emp ID', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('License', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Experience', style: TextStyle(fontWeight: FontWeight.bold))),
-          ],
-          rows: _drivers.map((driver) {
-            return DataRow(cells: [
-              DataCell(Text(driver['emp_id'].toString())),
-              DataCell(Text(driver['name'] ?? 'N/A')), // Use full_name instead of first_name + last_name
-              DataCell(Text(driver['driving_license'] ?? 'N/A')),
-              DataCell(Text(driver['experience'].toString())),
-            ]);
-          }).toList(),
+        //scrollDirection: Axis.horizontal, // Allows horizontal scrolling
+        child: Align(
+          alignment: Alignment.center,
+          child: DataTable(
+           // border: TableBorder.all(), // Adds borders for clarity
+            columns: const [
+              DataColumn(label: Text('Emp ID', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('License', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Experience', style: TextStyle(fontWeight: FontWeight.bold))),
+            ],
+            rows: _drivers.map((driver) {
+              return DataRow(cells: [
+                DataCell(Text(driver['emp_id'].toString())),
+                DataCell(Text(driver['name'] ?? 'N/A')), // Use full_name instead of first_name + last_name
+                DataCell(Text(driver['driving_license'] ?? 'N/A')),
+                DataCell(Text(driver['experience'].toString())),
+              ]);
+            }).toList(),
+          ),
         ),
       ),
     );

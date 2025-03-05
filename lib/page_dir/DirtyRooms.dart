@@ -49,19 +49,22 @@ class _DirtyroomsState extends State<Dirtyrooms> {
           : _rooms.isEmpty
           ? const Center(child: Text('No dirty rooms found'))
           : SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Enables horizontal scrolling
-        child: DataTable(
-         // border: TableBorder.all(), // Adds borders for clarity
-          columns: const [
-            DataColumn(label: Text('Room ID', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Type', style: TextStyle(fontWeight: FontWeight.bold))),
-          ],
-          rows: _rooms.map((room) {
-            return DataRow(cells: [
-              DataCell(Text(room['room_id'].toString())),
-              DataCell(Text(room['type'])),
-            ]);
-          }).toList(),
+        //scrollDirection: Axis.horizontal, // Enables horizontal scrolling
+        child: Align(
+          alignment: Alignment.center,
+          child: DataTable(
+           // border: TableBorder.all(), // Adds borders for clarity
+            columns: const [
+              DataColumn(label: Text('Room ID', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Type', style: TextStyle(fontWeight: FontWeight.bold))),
+            ],
+            rows: _rooms.map((room) {
+              return DataRow(cells: [
+                DataCell(Text(room['room_id'].toString())),
+                DataCell(Text(room['type'])),
+              ]);
+            }).toList(),
+          ),
         ),
       ),
     );
