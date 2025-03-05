@@ -49,21 +49,24 @@ class _ServicelengthState extends State<Servicelength> {
           : _employees.isEmpty
           ? const Center(child: Text('No data found'))
           : SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Allows horizontal scrolling if needed
-        child: DataTable(
-         // border: TableBorder.all(), // Adds table borders
-          columns: const [
-            DataColumn(label: Text('Emp ID', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Service Years', style: TextStyle(fontWeight: FontWeight.bold))),
-          ],
-          rows: _employees.map((employee) {
-            return DataRow(cells: [
-              DataCell(Text(employee['emp_id'].toString())),
-              DataCell(Text(employee['name'])),
-              DataCell(Text(employee['service_years'].toString())),
-            ]);
-          }).toList(),
+        //scrollDirection: Axis.horizontal, // Allows horizontal scrolling if needed
+        child: Align(
+          alignment: Alignment.center,
+          child: DataTable(
+           // border: TableBorder.all(), // Adds table borders
+            columns: const [
+              DataColumn(label: Text('Emp ID', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Service Years', style: TextStyle(fontWeight: FontWeight.bold))),
+            ],
+            rows: _employees.map((employee) {
+              return DataRow(cells: [
+                DataCell(Text(employee['emp_id'].toString())),
+                DataCell(Text(employee['name'])),
+                DataCell(Text(employee['service_years'].toString())),
+              ]);
+            }).toList(),
+          ),
         ),
       ),
     );

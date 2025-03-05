@@ -13,11 +13,13 @@ class _DeptavgsalaryState extends State<Deptavgsalary> {
   List<Map<String, dynamic>> _departments = [];
   bool _isLoading = true;
 
+
   @override
   void initState() {
     super.initState();
     fetchDeptAvgSalary();
   }
+
 
 
   Future<void> fetchDeptAvgSalary() async {

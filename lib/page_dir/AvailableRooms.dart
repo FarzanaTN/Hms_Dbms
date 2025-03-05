@@ -49,21 +49,24 @@ class _AvailableroomsState extends State<Availablerooms> {
           : _rooms.isEmpty
           ? const Center(child: Text('No available rooms found'))
           : SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Enables horizontal scrolling
-        child: DataTable(
-          //border: TableBorder.all(), // Adds borders for clarity
-          columns: const [
-            DataColumn(label: Text('Room ID', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Price', style: TextStyle(fontWeight: FontWeight.bold))),
-            DataColumn(label: Text('Type', style: TextStyle(fontWeight: FontWeight.bold))),
-          ],
-          rows: _rooms.map((room) {
-            return DataRow(cells: [
-              DataCell(Text(room['room_id'].toString())),
-              DataCell(Text("\$${room['price']}")), // Formats price with a dollar sign
-              DataCell(Text(room['type'])),
-            ]);
-          }).toList(),
+        //scrollDirection: Axis.horizontal, // Enables horizontal scrolling
+        child: Align(
+          alignment: Alignment.center,
+          child: DataTable(
+            //border: TableBorder.all(), // Adds borders for clarity
+            columns: const [
+              DataColumn(label: Text('Room ID', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Price', style: TextStyle(fontWeight: FontWeight.bold))),
+              DataColumn(label: Text('Type', style: TextStyle(fontWeight: FontWeight.bold))),
+            ],
+            rows: _rooms.map((room) {
+              return DataRow(cells: [
+                DataCell(Text(room['room_id'].toString())),
+                DataCell(Text("\$${room['price']}")), // Formats price with a dollar sign
+                DataCell(Text(room['type'])),
+              ]);
+            }).toList(),
+          ),
         ),
       ),
     );
