@@ -20,6 +20,7 @@ class _DeptavgsalaryState extends State<Deptavgsalary> {
   }
 
 
+
   Future<void> fetchDeptAvgSalary() async {
     final url = Uri.parse('http://localhost:3000/dept-avg-salary');
 
