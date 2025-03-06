@@ -377,7 +377,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
         'gender': gender,
         'email': emailController.text,
         'phone': phoneController.text,
-        'rating': 0,
+        //'rating': 0,
         'reservations': reservations,
       };
 

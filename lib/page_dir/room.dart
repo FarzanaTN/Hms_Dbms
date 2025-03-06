@@ -547,7 +547,7 @@ class _RoomPageState extends State<RoomPage> {
               SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
-                  labelText: "Room Price",
+                  labelText: "Room Price(BDT)",
                   border: OutlineInputBorder(),
                  // filled: true,
                 ),
@@ -704,8 +704,8 @@ class _RoomPageState extends State<RoomPage> {
                           DataColumn(label: Text('Type')),
                           DataColumn(label: Text('Status')),
                           DataColumn(label: Text('Available')),
-                          DataColumn(label: Text('Price')),
-                          DataColumn(label: Text('Profit')),
+                          DataColumn(label: Text('Price(BDT)')),
+                          DataColumn(label: Text('Profit(BDT)')),
                           // DataColumn(label: Text('Actions')),
                         ],
                         rows: rooms.map<DataRow>((room) {
@@ -715,8 +715,8 @@ class _RoomPageState extends State<RoomPage> {
                               DataCell(Text(room['type'])),
                               DataCell(Text(room['status'])),
                               DataCell(Text(room['available'])),
-                              DataCell(Text('\$${room['price']}')),
-                              DataCell(Text('\$${room['profit_per_room']}')),
+                              DataCell(Text(room['price'])),
+                              DataCell(Text(room['profit_per_room'])),
                               // DataCell(IconButton(
                               //   icon: Icon(Icons.delete),
                               //   onPressed: () => _showConfirmationDialog(
