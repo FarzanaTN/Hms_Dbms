@@ -43,7 +43,7 @@ class _AvailableroomsState extends State<Availablerooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Available Rooms')),
+      appBar: AppBar(title: const Text('Available Rooms', style: TextStyle(fontWeight: FontWeight.bold),), centerTitle: true,),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _rooms.isEmpty

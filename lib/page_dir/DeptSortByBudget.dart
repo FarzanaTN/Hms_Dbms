@@ -43,7 +43,7 @@ class _DeptsortbybudgetState extends State<Deptsortbybudget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Departments Sorted by Budget')),
+      appBar: AppBar(title: const Text('Departments Sorted by Budget', style: TextStyle(fontWeight: FontWeight.bold),), centerTitle: true,),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _departments.isEmpty

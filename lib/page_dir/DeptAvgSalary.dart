@@ -54,7 +54,7 @@ class _DeptavgsalaryState extends State<Deptavgsalary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Department Average Salary')),
+      appBar: AppBar(title: const Text('Department Average Salary', style: TextStyle(fontWeight: FontWeight.bold),), centerTitle: true,),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _departments.isEmpty

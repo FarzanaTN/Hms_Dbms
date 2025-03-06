@@ -43,7 +43,7 @@ class _DirtyroomsState extends State<Dirtyrooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dirty Rooms')),
+      appBar: AppBar(title: const Text('Dirty Rooms', style: TextStyle(fontWeight: FontWeight.bold),) , centerTitle: true,),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _rooms.isEmpty
