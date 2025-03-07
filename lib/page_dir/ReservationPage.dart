@@ -47,7 +47,7 @@ class _ReservationPageState extends State<ReservationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Reservations')),
+    //  appBar: AppBar(title: Text('Reservations')),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : Column(

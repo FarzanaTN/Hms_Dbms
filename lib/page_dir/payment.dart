@@ -51,13 +51,14 @@ class _PaymentPageState extends State<PaymentPage> {
   //     print('Failed to update payment: ${response.body}');
   //   }
   // }
-  Future<void> updatePayment(int id, String totalAmountString, String paidAmountString) async {
+  Future<void> updatePayment(String id, String totalAmountString, String paidAmountString) async {
     // Convert total_amount and paid to appropriate types
     double totalAmount = double.parse(totalAmountString);
     double paid = double.parse(paidAmountString);
+    int idi=int.parse(id);
 
     final response = await http.put(
-      Uri.parse('http://localhost:3000/payment/$id'),
+      Uri.parse('http://localhost:3000/payment/$idi'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
         'total_amount': totalAmount,
@@ -80,7 +81,7 @@ class _PaymentPageState extends State<PaymentPage> {
         _showConfirmationDialog(
           "Update Payment",
           "Are you sure you want to update the payment?",
-              () => updatePayment(paymentId! as int, paidAmount! , dueAmount! ),
+              () => updatePayment(paymentId!, paidAmount! , dueAmount! ),
         );
       } else {
         print("Please provide valid inputs for Update");
@@ -209,7 +210,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 decoration: InputDecoration(
                   labelText: "Payment ID",
                   border: OutlineInputBorder(),
-                  filled: true,
+                //  filled: true,
                 ),
                 onChanged: (value) {
                   paymentId = value;
@@ -219,9 +220,9 @@ class _PaymentPageState extends State<PaymentPage> {
               SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
-                  labelText: "Paid Amount",
+                  labelText: "Total Amount",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 onChanged: (value) {
                   paidAmount = value;
@@ -231,9 +232,9 @@ class _PaymentPageState extends State<PaymentPage> {
               SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
-                  labelText: "Due Amount",
+                  labelText: "Paid Amount",
                   border: OutlineInputBorder(),
-                  filled: true,
+                 // filled: true,
                 ),
                 onChanged: (value) {
                   dueAmount = value;
@@ -241,34 +242,80 @@ class _PaymentPageState extends State<PaymentPage> {
                 controller: TextEditingController(text: dueAmount),
               ),
               SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: handleAction,
+              //   child: Text("Submit"),
+              // ),
               ElevatedButton(
                 onPressed: handleAction,
-                child: Text("Submit"),
-              ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  side: BorderSide(
+                    color: Colors.blue[900]!, // Dark blue border for Confirm
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold, // Bold text
+                    color: Colors.blue[900]!, // Blue font for Confirm
+                  ),
+                ),
+              )
+
             ],
 
             // Table-like structure for payment information
+            // if (selectedAction == "View") ...[
+            //   SizedBox(height: 20),
+            //   DataTable(
+            //     columns: [
+            //       DataColumn(label: Text("Payment ID")),
+            //       DataColumn(label: Text("Customer ID")),
+            //       DataColumn(label: Text("Total Amount")),
+            //       DataColumn(label: Text("Paid")),
+            //       DataColumn(label: Text("Due")),
+            //     ],
+            //     rows: payments
+            //         .map<DataRow>((payment) => DataRow(cells: [
+            //       DataCell(Text(payment['id'].toString())),
+            //       DataCell(Text(payment['cus_id'].toString())),
+            //       DataCell(Text(payment['total_amount'].toString())),
+            //       DataCell(Text(payment['paid'].toString())),
+            //       DataCell(Text(payment['due'].toString())),
+            //     ]))
+            //         .toList(),
+            //   ),
+            // ],
+            // Table-like structure for payment information
             if (selectedAction == "View") ...[
               SizedBox(height: 20),
-              DataTable(
-                columns: [
-                  DataColumn(label: Text("Payment ID")),
-                  DataColumn(label: Text("Customer ID")),
-                  DataColumn(label: Text("Total Amount")),
-                  DataColumn(label: Text("Paid")),
-                  DataColumn(label: Text("Due")),
-                ],
-                rows: payments
-                    .map<DataRow>((payment) => DataRow(cells: [
-                  DataCell(Text(payment['id'].toString())),
-                  DataCell(Text(payment['cus_id'].toString())),
-                  DataCell(Text(payment['total_amount'].toString())),
-                  DataCell(Text(payment['paid'].toString())),
-                  DataCell(Text(payment['due'].toString())),
-                ]))
-                    .toList(),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical, // Enable horizontal scrolling
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text("Payment ID")),
+                      DataColumn(label: Text("Customer ID")),
+                      DataColumn(label: Text("Total Amount")),
+                      DataColumn(label: Text("Paid")),
+                      DataColumn(label: Text("Due")),
+                    ],
+                    rows: payments
+                        .map<DataRow>((payment) => DataRow(cells: [
+                      DataCell(Text(payment['id'].toString())),
+                      DataCell(Text(payment['cus_id'].toString())),
+                      DataCell(Text(payment['total_amount'].toString())),
+                      DataCell(Text(payment['paid'].toString())),
+                      DataCell(Text(payment['due'].toString())),
+                    ]))
+                        .toList(),
+                  ),
+                ),
               ),
             ],
+
           ],
         ),
       ),

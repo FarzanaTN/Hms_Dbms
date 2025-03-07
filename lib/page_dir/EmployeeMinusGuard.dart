@@ -37,7 +37,7 @@ class _EmployeeminusguardState extends State<Employeeminusguard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Employees Not in Security Guard', style: TextStyle(fontWeight: FontWeight.bold),), centerTitle: true,),
+      appBar: AppBar(title: const Text('Employees Without Security Guard', style: TextStyle(fontWeight: FontWeight.bold),), centerTitle: true,),
       body: employees.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
