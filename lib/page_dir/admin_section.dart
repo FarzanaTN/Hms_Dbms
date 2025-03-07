@@ -11,13 +11,16 @@ import 'package:hotel_dbms/page_dir/start_page.dart';
 
 import 'AllCustomerPage.dart';
 import 'EmployeeCounttByDeptPage.dart';
+import 'EmployeesAbovAverage.dart';
 import 'MaximumSalaryPage.dart';
 import 'ProfitPerMonthPage.dart';
+import 'ReservationCountEachCustomer.dart';
 import 'ReservationPage.dart';
 import 'current_customers.dart';
 import 'ServiceLength.dart';
 import 'DriverDetails.dart';
 import 'AvailableRooms.dart';
+import 'highBudgetEmployees.dart';
 
 
 class AdminSection extends StatefulWidget {
@@ -49,7 +52,10 @@ class _AdminSection extends State<AdminSection> {
     Deptavgsalary(),
     Availablerooms(),
     Dirtyrooms(),
-    Deptsortbybudget()
+    Deptsortbybudget(),
+    HighBudgetEmployees(),
+    CustomerReservations(),
+    EmployeesAboveAvgSalary(),
   ];
 
   void _navigateToHotelHomePage() {
@@ -242,6 +248,33 @@ class _AdminSection extends State<AdminSection> {
                     onTap: () {
                       setState(() {
                         _selectedIndex = 16;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.monetization_on),
+                    title: const Text('Employees with High Budget Department'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 17;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.room),
+                    title: const Text('Reservation Count per Customer'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 18;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.monetization_on),
+                    title: const Text('Employees Above Average Dept salary'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 19;
                       });
                     },
                   ),

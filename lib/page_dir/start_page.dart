@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -166,7 +167,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
 
     void _showPaymentPopup(double totalBill) {
       final TextEditingController paidAmountController =
-          TextEditingController();
+      TextEditingController();
 
       showDialog(
         context: context,
@@ -260,7 +261,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
                           } else {
                             try {
                               final paymentUrl =
-                                  Uri.parse('http://localhost:3000/addPayment');
+                              Uri.parse('http://localhost:3000/addPayment');
                               final paymentRequestBody = {
                                 'total_amount': totalBill,
                                 'paid': paidAmount,
@@ -321,7 +322,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
 
     void _submitForm() async {
       final combinedUrl =
-          Uri.parse('http://localhost:3000/addCustomerAndReservation');
+      Uri.parse('http://localhost:3000/addCustomerAndReservation');
 
       final reservations = [];
 
@@ -417,7 +418,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content:
-                  Text('An error occurred while creating the reservations.')),
+              Text('An error occurred while creating the reservations.')),
         );
       }
     }
@@ -485,9 +486,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: gender,
                             items: ['Male', 'Female']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               gender = value;
@@ -525,9 +526,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: roomType1,
                             items: ['Single Bed', 'Double Bed']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               roomType1 = value;
@@ -592,9 +593,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: paymentMethod,
                             items: ['Cash', 'Banking/Others']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               paymentMethod = value;
@@ -624,9 +625,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: roomType2,
                             items: ['Single Bed', 'Double Bed']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               roomType2 = value;
@@ -691,9 +692,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: paymentMethod,
                             items: ['Cash', 'Banking/Others']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               paymentMethod = value;
@@ -723,9 +724,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: roomType3,
                             items: ['Single Bed', 'Double Bed']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               roomType3 = value;
@@ -790,9 +791,9 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             value: paymentMethod,
                             items: ['Cash', 'Banking/Others']
                                 .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item),
-                                    ))
+                              value: item,
+                              child: Text(item),
+                            ))
                                 .toList(),
                             onChanged: (value) {
                               paymentMethod = value;
@@ -912,225 +913,225 @@ class _HotelHomePageState extends State<HotelHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(children: [
-      // Background Image
-      Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/h1.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      Column(
-        children: [
-          // Navigation Bar
+          // Background Image
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            color: Colors.white.withOpacity(0.9),
-            height: 80.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Royal Haven Hotel',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                   // Makes the text bold
-                      color: Colors.blue[900]!,         // Sets the text color to black
-
-                  ),
-                ),
-                Row(
-                  children: [
-                    TextButton(onPressed: () {}, child: Text('Home',style: TextStyle(
-                     // fontWeight: FontWeight.bold, // Makes the text bold
-                      color: Colors.blue[900]!,         // Sets the text color to black
-                    ),)),
-                    TextButton(onPressed: _scrollToRooms, child: Text('Rooms',style: TextStyle(
-                     // fontWeight: FontWeight.bold, // Makes the text bold
-                      color: Colors.blue[900]!,         // Sets the text color to black
-                    ),)),
-                    //   TextButton(onPressed: () {}, child: Text('Facilities')),
-                    TextButton(onPressed: () {}, child: Text('Contact Us',style: TextStyle(
-                    //  fontWeight: FontWeight.bold, // Makes the text bold
-                      color: Colors.blue[900]!,         // Sets the text color to black
-                    ),)),
-                    // TextButton(onPressed: () {}, child: Text('About')),
-                    SizedBox(width: 20),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     _showBookingPopup(context);
-                    //   },
-                    //   child: Text('Book Now'),
-                    // ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     _showBookingPopup(context);
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.zero,
-                    //     ),
-                    //   ),
-                    //   child: Text('Book Now'),
-                    // ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _showBookingPopup(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        side: BorderSide(
-                          color: Colors.blue[900]!,  // Dark blue color
-                          width: 2.0,  // Border width
-                        ),
-                      ),
-                      child: Text('Book Now',style: TextStyle(
-                        fontWeight: FontWeight.bold, // Makes the text bold
-                        color: Colors.blue[900]!,         // Sets the text color to black
-                      ),),
-                    ),
-
-                    SizedBox(width: 10),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     _showLoginPopup(context);
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.zero,
-                    //     ),
-                    //   ),
-                    //   child: Text('Login'),
-                    // ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _showLoginPopup(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        side: BorderSide(
-                          color: Colors.blue[900]!,  // Dark blue color
-                          width: 2.0,  // Border width
-                        ),
-                      ),
-                      child: Text('Login',style: TextStyle(
-                        fontWeight: FontWeight.bold, // Makes the text bold
-                        color: Colors.blue[900]!,         // Sets the text color to black
-                      ),),
-                    )
-
-                  ],
-                ),
-              ],
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/h1.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          SizedBox(height: 50),
+          Column(
+            children: [
+              // Navigation Bar
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                color: Colors.white.withOpacity(0.9),
+                height: 80.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Royal Haven Hotel',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        // Makes the text bold
+                        color: Colors.blue[900]!,         // Sets the text color to black
 
-          // Rooms Section
-          Expanded(
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
-                  // Background Image
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/h1.jpg'),
-                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  // Rooms Section
-                  Container(
-                    key: _roomsSectionKey, // Assigning key to Rooms section
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Text(
-                          'Rooms',
-                          style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold,color: Colors.white),
-                        ),
-                        SizedBox(height: 20),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 3 / 2,
-                          ),
-                          itemCount: rooms.length,
-                          itemBuilder: (context, index) {
-                            return RoomCard(room: rooms[index]);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Contact Us Section
-                  Container(
-                    key: _contactSectionKey, // Assigning key to Contact section
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Contact Us',
-                          style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 20),
-                        // Social Media and Feedback
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.facebook,
-                                  size: 40, color: Colors.blue),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.email,
-                                  size: 40, color: Colors.red),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
+                        TextButton(onPressed: () {}, child: Text('Home',style: TextStyle(
+                          // fontWeight: FontWeight.bold, // Makes the text bold
+                          color: Colors.blue[900]!,         // Sets the text color to black
+                        ),)),
+                        TextButton(onPressed: _scrollToRooms, child: Text('Rooms',style: TextStyle(
+                          // fontWeight: FontWeight.bold, // Makes the text bold
+                          color: Colors.blue[900]!,         // Sets the text color to black
+                        ),)),
+                        //   TextButton(onPressed: () {}, child: Text('Facilities')),
+                        TextButton(onPressed: () {}, child: Text('Contact Us',style: TextStyle(
+                          //  fontWeight: FontWeight.bold, // Makes the text bold
+                          color: Colors.blue[900]!,         // Sets the text color to black
+                        ),)),
+                        // TextButton(onPressed: () {}, child: Text('About')),
+                        SizedBox(width: 20),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     _showBookingPopup(context);
+                        //   },
+                        //   child: Text('Book Now'),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     _showBookingPopup(context);
+                        //   },
+                        //   style: ElevatedButton.styleFrom(
+                        //     shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.zero,
+                        //     ),
+                        //   ),
+                        //   child: Text('Book Now'),
+                        // ),
                         ElevatedButton(
                           onPressed: () {
-                            // Implement send feedback functionality here
-                            //_showFeedbackPopup(context);
+                            _showBookingPopup(context);
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                             ),
+                            side: BorderSide(
+                              color: Colors.blue[900]!,  // Dark blue color
+                              width: 2.0,  // Border width
+                            ),
                           ),
-                          child: Text('Send Feedback'),
+                          child: Text('Book Now',style: TextStyle(
+                            fontWeight: FontWeight.bold, // Makes the text bold
+                            color: Colors.blue[900]!,         // Sets the text color to black
+                          ),),
                         ),
+
+                        SizedBox(width: 10),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     _showLoginPopup(context);
+                        //   },
+                        //   style: ElevatedButton.styleFrom(
+                        //     shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.zero,
+                        //     ),
+                        //   ),
+                        //   child: Text('Login'),
+                        // ),
+                        ElevatedButton(
+                          onPressed: () {
+                            _showLoginPopup(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
+                            side: BorderSide(
+                              color: Colors.blue[900]!,  // Dark blue color
+                              width: 2.0,  // Border width
+                            ),
+                          ),
+                          child: Text('Login',style: TextStyle(
+                            fontWeight: FontWeight.bold, // Makes the text bold
+                            color: Colors.blue[900]!,         // Sets the text color to black
+                          ),),
+                        )
+
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              SizedBox(height: 50),
+
+              // Rooms Section
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Column(
+                    children: [
+                      // Background Image
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/h1.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      // Rooms Section
+                      Container(
+                        key: _roomsSectionKey, // Assigning key to Rooms section
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Rooms',
+                              style: TextStyle(
+                                  fontSize: 28, fontWeight: FontWeight.bold,color: Colors.white),
+                            ),
+                            SizedBox(height: 20),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 3 / 2,
+                              ),
+                              itemCount: rooms.length,
+                              itemBuilder: (context, index) {
+                                return RoomCard(room: rooms[index]);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Contact Us Section
+                      Container(
+                        key: _contactSectionKey, // Assigning key to Contact section
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Contact Us',
+                              style: TextStyle(
+                                  fontSize: 28, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 20),
+                            // Social Media and Feedback
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.facebook,
+                                      size: 40, color: Colors.blue),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.email,
+                                      size: 40, color: Colors.red),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                // Implement send feedback functionality here
+                                //_showFeedbackPopup(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                              child: Text('Send Feedback'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ]));
+        ]));
   }
 
 }
@@ -1144,9 +1145,9 @@ class Room {
 
   Room(
       {required this.name,
-      required this.image,
-      required this.price,
-      required this.details});
+        required this.image,
+        required this.price,
+        required this.details});
 }
 
 // Sample Room Data
@@ -1159,12 +1160,12 @@ List<Room> rooms = [
   Room(
       name: "Single Bed Room",
       image: "assets/room2.jpg",
-      price: "\2100 BDT/night",
+      price: "\2500 BDT/night",
       details: "Cozy room with single bed, WiFi, and AC."),
   Room(
       name: "Single Bed Room",
       image: "assets/room3.jpg",
-      price: "\2100 BDT/night",
+      price: "\2000 BDT/night",
       details: "Cozy room with single bed, WiFi, and AC."),
   Room(
       name: "Double Bed Room",
@@ -1174,7 +1175,7 @@ List<Room> rooms = [
   Room(
       name: "Double Bed Room",
       image: "assets/room5.jpg",
-      price: "\4000 BDT/night",
+      price: "\3000 BDT/night",
       details: "Spacious double bed room with a great view."),
 ];
 
@@ -1185,6 +1186,46 @@ class RoomCard extends StatelessWidget {
   const RoomCard({Key? key, required this.room}) : super(key: key);
 
   @override
+  // Widget build(BuildContext context) {
+  //   return Card(
+  //     elevation: 5,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Expanded(
+  //           child: ClipRRect(
+  //             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+  //             child: Image.asset(room.image,
+  //                 fit: BoxFit.cover, width: double.infinity),
+  //           ),
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(room.name,
+  //                   style:
+  //                   TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  //               SizedBox(height: 5),
+  //               Text(room.details,
+  //                   style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+  //               SizedBox(height: 5),
+  //               Text(room.price,
+  //                   style: TextStyle(
+  //                       fontSize: 16,
+  //                       fontWeight: FontWeight.bold,
+  //                       color: Colors.green)),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
@@ -1192,11 +1233,16 @@ class RoomCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.all(10.0), // Add padding around the image
             child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              child: Image.asset(room.image,
-                  fit: BoxFit.cover, width: double.infinity),
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                room.image,
+                height: 350, // Set a fixed height for the image
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
@@ -1204,18 +1250,21 @@ class RoomCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(room.name,
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(
+                  room.name,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 5),
-                Text(room.details,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+                Text(
+                  room.details,
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                ),
                 SizedBox(height: 5),
-                Text(room.price,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green)),
+                Text(
+                  room.price,
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green),
+                ),
               ],
             ),
           ),
@@ -1223,6 +1272,7 @@ class RoomCard extends StatelessWidget {
       ),
     );
   }
+
 }
 
 // Dummy Popups (To be implemented)
