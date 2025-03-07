@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_dbms/page_dir/DeptAvgSalary.dart';
 import 'package:hotel_dbms/page_dir/DeptSortByBudget.dart';
 import 'package:hotel_dbms/page_dir/DirtyRooms.dart';
+import 'package:hotel_dbms/page_dir/EmployeeMinusGuard.dart';
 import 'package:hotel_dbms/page_dir/employee.dart';
 import 'package:hotel_dbms/page_dir/payment.dart';
 import 'package:hotel_dbms/page_dir/room.dart';
@@ -12,6 +13,7 @@ import 'package:hotel_dbms/page_dir/start_page.dart';
 import 'AllCustomerPage.dart';
 import 'EmployeeCounttByDeptPage.dart';
 import 'EmployeesAbovAverage.dart';
+import 'GpUser.dart';
 import 'MaximumSalaryPage.dart';
 import 'ProfitPerMonthPage.dart';
 import 'ReservationCountEachCustomer.dart';
@@ -56,6 +58,8 @@ class _AdminSection extends State<AdminSection> {
     HighBudgetEmployees(),
     CustomerReservations(),
     EmployeesAboveAvgSalary(),
+    Gpuser(),
+    Employeeminusguard(),
   ];
 
   void _navigateToHotelHomePage() {
@@ -275,6 +279,24 @@ class _AdminSection extends State<AdminSection> {
                     onTap: () {
                       setState(() {
                         _selectedIndex = 19;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.phone),
+                    title: const Text('Gp User Employee '),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 20;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.work),
+                    title: const Text('Employee Except SecurityGuard'),
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 21;
                       });
                     },
                   ),
