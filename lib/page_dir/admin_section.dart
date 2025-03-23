@@ -35,7 +35,26 @@ class _AdminSection extends State<AdminSection> {
 
   // List of pages to display in the right panel
   final List<Widget> _pages = [
-    Center(child: Text('Dashboard')), // Placeholder for Dashboard
+   // Center(child: Text('Welcome Admin')), // Placeholder for Dashboard
+    Center(
+      child: Text(
+        'Welcome Admin!!',
+        style: TextStyle(
+          fontSize: 32, // Large font size
+          fontWeight: FontWeight.bold, // Bold text
+          color: Colors.blueAccent, // Attractive color
+          letterSpacing: 1.5, // Spacing between letters
+          shadows: [
+            Shadow(
+              blurRadius: 10.0,
+              color: Colors.black26,
+              offset: Offset(2, 2),
+            ),
+          ],
+        ),
+      ),
+    ),
+
     RoomPage(),
     EmployeePage(),
     DepartmentPage(),
